@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>addproduct</title>
 </head>
 <body>
+<div class="">
+    <center>    <h3>AddProduct</h3></center>
+    <form method="post" style="text-align: center">
+        <input type="hidden" name="id" placeholder="id">
+        <input type="text" name="name" placeholder="name" required>
+        <input type="text" name="price" placeholder="price" required>
+        <input type="text" name="description" placeholder=" description" required>
+        <select name="id_category">
+            {categories}
+        </select>
+        <button type="submit">Xác nhận</button>
+    </form>
+</div>
 
 </body>
 </html>
