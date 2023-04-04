@@ -1,0 +1,114 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema case_study_md3
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema case_study_md3
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `case_study_md3` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `case_study_md3` ;
+
+-- -----------------------------------------------------
+-- Table `case_study_md3`.`category_list`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `case_study_md3`.`category_list` (
+  `categoryId` INT NOT NULL AUTO_INCREMENT,
+  `nameCategory` VARCHAR(150) NOT NULL,
+  PRIMARY KEY (`categoryId`),
+  UNIQUE INDEX `nameCategory_UNIQUE` (`nameCategory` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `case_study_md3`.`user_list`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `case_study_md3`.`user_list` (
+  `userId` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(16) NOT NULL,
+  `nameUser` VARCHAR(75) NOT NULL,
+  `ageUser` INT NOT NULL,
+  `phoneUser` INT NOT NULL,
+  `addressUser` VARCHAR(150) NOT NULL,
+  `roleUser` TINYINT NOT NULL,
+  PRIMARY KEY (`userId`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `case_study_md3`.`order_list`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `case_study_md3`.`order_list` (
+  `orderId` INT NOT NULL AUTO_INCREMENT,
+  `timeOrder` DATETIME NOT NULL,
+  `totaleCost` FLOAT NOT NULL,
+  `statusOrder` TINYINT NOT NULL,
+  `userId` INT NOT NULL,
+  PRIMARY KEY (`orderId`),
+  INDEX `userId_idx` (`userId` ASC) VISIBLE,
+  CONSTRAINT `userId`
+    FOREIGN KEY (`userId`)
+    REFERENCES `case_study_md3`.`user_list` (`userId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `case_study_md3`.`product_list`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `case_study_md3`.`product_list` (
+  `productId` INT NOT NULL AUTO_INCREMENT,
+  `nameProduct` VARCHAR(150) NOT NULL,
+  `priceProduct` FLOAT NOT NULL,
+  `quantityProduct` INT NOT NULL,
+  `descriptionProduct` VARCHAR(200) NOT NULL,
+  `categoryId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`productId`),
+  INDEX `categoryId_idx` (`categoryId` ASC) VISIBLE,
+  CONSTRAINT `categoryId`
+    FOREIGN KEY (`categoryId`)
+    REFERENCES `case_study_md3`.`category_list` (`categoryId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `case_study_md3`.`order_detail`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `case_study_md3`.`order_detail` (
+  `orderId` INT NOT NULL,
+  `productId` INT NOT NULL,
+  `priceCurrent` FLOAT NOT NULL,
+  `quantity` INT NOT NULL,
+  INDEX `orderId_idx` (`orderId` ASC) VISIBLE,
+  INDEX `productId_idx` (`productId` ASC) VISIBLE,
+  CONSTRAINT `orderId`
+    FOREIGN KEY (`orderId`)
+    REFERENCES `case_study_md3`.`order_list` (`orderId`),
+  CONSTRAINT `productId`
+    FOREIGN KEY (`productId`)
+    REFERENCES `case_study_md3`.`product_list` (`productId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
