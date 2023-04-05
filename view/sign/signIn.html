@@ -4,15 +4,133 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<div class="">
-    <center><h3 style="color: blue"> Login</h3></center>
-    <form action="" method="post" style="text-align: center">
-        <input type="email" placeholder="email">
-        <input type="password" placeholder="password">
-        <button type="submit">Login</button>
-    </form>
-</div>
+<style>
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Reseting CSS
+ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * Styling navigation bar for large screen devices
+     */
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: Black;
+    }
+
+    .navbar-left {
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    .navbar-right {
+        display: inline-block;
+        margin-right: 15px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .navbar-brand,
+    .navbar .nav-link {
+        color: White;
+        text-decoration: none;
+        display: inline-block;
+        padding: 15px;
+    }
+
+    .navbar-brand {
+        font-weight: bold;
+        padding-left: 30px;
+        padding-right: 30px;
+        background: RoyalBlue;
+    }
+
+    .navbar .nav-link:hover {
+        color: LightGray;
+    }
+    .navbar-collapse,
+    .navbar-toggler {
+        display: none;
+    }
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * Override styles to support mobile devices
+     */
+
+    @media (max-width: 842px) {
+        .navbar-right,
+        .navbar-left {
+            display: block;
+            border-top: 1px solid DimGray;
+        }
+
+        .navbar-right {
+            position: static;
+        }
+
+        .navbar .nav-link {
+            display: block;
+        }
+
+        .navbar-collapse:checked + .navbar {
+            max-height: 50px;
+            overflow: hidden;
+        }
+
+        .navbar-toggler {
+            color: White;
+            display: inline-block;
+            padding: 15px 25px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-left: 1px solid DimGray;
+            cursor: pointer;
+        }
+    }
+</style>
+
+<nav class="navbar">
+    <div class="contronller">
+        <a class="navbar-brand" href="/home">
+            <h1> HOME </h1>
+        </a>
+
+        <div class="navbar-left">
+            <a class="nav-link" href="#">Link 1</a>
+            <a class="nav-link" href="#">Link 2</a>
+            <a class="nav-link" href="#">Link 3</a>
+            <a class="nav-link" href="#">Link 4</a>
+            <a class="nav-link" href="#">Link 5</a>
+        </div>
+
+        <div class="navbar-right">
+
+            <a class="nav-link" href="/signin">SIGN IN</a>
+            <a class="nav-link" href="#">SIGN OUT</a>
+        </div>
+    </div>
+</nav>
 <body>
+<center>
+    <div class="" style=" position: relative; top:75px">
+        <center><h3 style="color: blue"> Login</h3></center>
+        <form action="" method="post" style="text-align: center">
+            <input type="email" placeholder="email">
+            <input type="password" placeholder="password">"
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</center>
+
 
 </body>
 </html>

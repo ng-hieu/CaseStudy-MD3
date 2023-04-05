@@ -39,6 +39,15 @@ class ProductController {
             res.end();
         })
     }
+    add = (req,res,) =>{
+        fs.readFile("./view/product/add.html", "utf-8", async (error, addHtml) => {
+            let products = await productService.showAll();
+            addHtml = this.getHtmlProduct(products, addHtml);
+            res.write(addHtml);
+            res.end();
+        })
+    }
+
 }
 
 module.exports = new ProductController()
