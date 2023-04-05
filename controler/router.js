@@ -1,6 +1,6 @@
-const productControler = require('./handle/productControler')
+const productController = require('./handle/productController')
 const router = {
-    "home": productControler.home
+    "home": productController.home
 }
 
 module.exports = router;
