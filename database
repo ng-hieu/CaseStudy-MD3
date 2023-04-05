@@ -77,7 +77,8 @@ CREATE TABLE IF NOT EXISTS `case_study_md3`.`product_list` (
   `priceProduct` FLOAT NOT NULL,
   `quantityProduct` INT NOT NULL,
   `descriptionProduct` VARCHAR(200) NOT NULL,
-  `categoryId` INT NULL DEFAULT NULL,
+  `categoryId` INT NOT NULL,
+  `imageProduct` VARCHAR(10000) NOT NULL,
   PRIMARY KEY (`productId`),
   INDEX `categoryId_idx` (`categoryId` ASC) VISIBLE,
   CONSTRAINT `categoryId`
