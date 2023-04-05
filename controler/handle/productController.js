@@ -23,14 +23,31 @@ class ProductController {
             res.end();
         })
     }
-    navbar = (req, res) => {
-        fs.readFile("./view/NavBarTesting   .html", "utf-8", async (error, indexHtml) => {
+    signIn = (req,res) =>{
+        fs.readFile("./view/sign/signIn.html", "utf-8", async (error, signInHtml) => {
             let products = await productService.showAll();
-            indexHtml = this.getHtmlProduct(products, indexHtml);
-            res.write(indexHtml);
+            signInHtml = this.getHtmlProduct(products, signInHtml);
+            res.write(signInHtml);
             res.end();
         })
     }
+    signUp = (req,res) =>{
+        fs.readFile("./view/sign/signUp.html", "utf-8", async (error, signUpHtml) => {
+            let products = await productService.showAll();
+            signUpHtml = this.getHtmlProduct(products, signUpHtml);
+            res.write(signUpHtml);
+            res.end();
+        })
+    }
+    add = (req,res,) =>{
+        fs.readFile("./view/product/add.html", "utf-8", async (error, addHtml) => {
+            let products = await productService.showAll();
+            addHtml = this.getHtmlProduct(products, addHtml);
+            res.write(addHtml);
+            res.end();
+        })
+    }
+
 }
 
 module.exports = new ProductController()
