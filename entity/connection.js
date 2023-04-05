@@ -11,7 +11,7 @@ class Connection {
         return mysql.createConnection(this.MySQLConfig);
     }
 
-    connectToMySQL = () => {
+    connectingToMySQL = () => {
         this.getConnection().connect((error) => {
             if (error) {
                 console.log(error, 'Connection unsuccessful');
