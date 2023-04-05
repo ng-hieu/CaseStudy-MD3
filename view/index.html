@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="">
-    <center><h3>Product Table</h3></center>
+    <center><h3>PRODUCT TABLE</h3></center>
     <form method="post">
         <table class="table table-striped">
             <thead>
@@ -28,6 +28,29 @@
             </thead>
             <tbody>
             {product}
+            </tbody>
+
+        </table>
+
+    </form>
+</div>
+
+
+<div class="">
+    <center><h3>SHOPPING CART</h3></center>
+    <form method="post">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">price</th>
+                <th scope="col">quantity</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {shoppingCart}
             </tbody>
 
         </table>
