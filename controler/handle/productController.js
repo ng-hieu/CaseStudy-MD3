@@ -23,6 +23,14 @@ class ProductController {
             res.end();
         })
     }
+    navbar = (req, res) => {
+        fs.readFile("./view/NavBarTesting   .html", "utf-8", async (error, indexHtml) => {
+            let products = await productService.showAll();
+            indexHtml = this.getHtmlProduct(products, indexHtml);
+            res.write(indexHtml);
+            res.end();
+        })
+    }
 }
 
 module.exports = new ProductController()
