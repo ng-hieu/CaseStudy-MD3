@@ -1,4 +1,4 @@
-import fs from "fs";
+const fs = require('fs')
 
 class ProductControler {
 
@@ -12,4 +12,4 @@ class ProductControler {
     }
 }
 
-module.exports = new ProductControler();
+module.exports = new ProductControler()
