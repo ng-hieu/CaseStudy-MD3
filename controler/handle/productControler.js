@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 //import fs from "fs";
 const fs = require('fs')
+=======
+const fs = require('fs')
+
+>>>>>>> 035448d949e22890899b5b7e6f4427ab82faec63
 class ProductControler {
 
 
@@ -12,4 +17,4 @@ class ProductControler {
     }
 }
 
-module.exports = new ProductControler();
+module.exports = new ProductControler()
