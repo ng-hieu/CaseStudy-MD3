@@ -52,7 +52,6 @@ class userController {
                 res.end();
             })
         }
-
     }
 }
 

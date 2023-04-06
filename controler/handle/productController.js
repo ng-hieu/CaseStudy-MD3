@@ -26,10 +26,9 @@ class ProductController {
                 res.end();
             })
         } else {
-            res.writeHead(301, {'location': "/home"});
+            res.writeHead(301, {'location': "/signin"});
             res.end();
         }
-
     }
 
     add = (req,res,) =>{
