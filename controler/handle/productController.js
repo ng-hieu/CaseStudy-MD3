@@ -1,6 +1,6 @@
 const fs = require('fs')
 const productService = require('../../service/productService');
-
+const cookie=require('cookie');
 class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
@@ -16,22 +16,22 @@ class ProductController {
     }
 
     home = (req, res) => {
-        fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
-            let products = await productService.showAll();
-            indexHtml = this.getHtmlProduct(products, indexHtml);
-            res.write(indexHtml);
+        let cookies = cookie.parse(req.headers.cookie || '');
+        if (cookies.user){
+            let user=JSON.parse(cookies.user);
+            fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
+                let products = await productService.showAll();
+                indexHtml = this.getHtmlProduct(products, indexHtml);
+                res.write(indexHtml);
+                res.end();
+            })
+        } else {
+            res.writeHead(301, {'location': "/signin"});
             res.end();
-        })
+        }
     }
 
-    add = (req,res,) =>{
-        fs.readFile("./view/product/add.html", "utf-8", async (error, addHtml) => {
-            let products = await productService.showAll();
-            addHtml = this.getHtmlProduct(products, addHtml);
-            res.write(addHtml);
-            res.end();
-        })
-    }
+
     descriptionProduct=(req,res,id)=>{
         fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
             let products = await productService.findById(id);

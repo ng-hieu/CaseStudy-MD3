@@ -13,6 +13,15 @@
             crossorigin="anonymous"></script>
 </head>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+        margin-top: 75px
+    }
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Reseting CSS
  */
@@ -35,6 +44,12 @@
         background: Black;
         padding-top: 0;
         padding-bottom: 0;
+        font-size: 15px
+    }
+    .navbar-brand {
+        width: 100px;
+
+        display: inline-block;
     }
 
     .navbar-left {
@@ -110,6 +125,29 @@
         }
     }
 </style>
+<nav class="navbar">
+    <div class="contronller">
+        <a class="navbar-brand" href="/home">
+            HOME
+        </a>
+
+        <div class="navbar-left">
+            <a class="nav-link" href="/addProduct">add Product</a>
+            <a class="nav-link" href="#">Link 2</a>
+            <a class="nav-link" href="#">Link 3</a>
+            <a class="nav-link" href="#">Link 4</a>
+            <a class="nav-link" href="#">Link 5</a>
+        </div>
+
+        <div class="navbar-right">
+
+            <a class="nav-link" href="/signin">SIGN IN</a>
+            <a class="nav-link" href="/signup">SIGN UP</a>
+        </div>
+    </div>
+</nav>
+
+<body >
 <style>
     /*Li va Ul*/
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
@@ -231,28 +269,6 @@
         font-weight: 600;
     }
 </style>
-<body>
-<nav class="navbar">
-    <div class="contronller">
-        <a class="navbar-brand" href="/home">
-            HOME
-        </a>
-
-        <div class="navbar-left">
-            <a class="nav-link" href="#">Link 1</a>
-            <a class="nav-link" href="#">Link 2</a>
-            <a class="nav-link" href="#">Link 3</a>
-            <a class="nav-link" href="#">Link 4</a>
-            <a class="nav-link" href="#">Link 5</a>
-        </div>
-
-        <div class="navbar-right">
-
-            <a class="nav-link" href="/signin">SIGN IN</a>
-            <a class="nav-link" href="/signup">SIGN UP</a>
-        </div>
-    </div>
-</nav>
 <div id="wrapper">
     <div class="headline">
         <h1>shop ba con sói hướng nội</h1>
@@ -261,123 +277,11 @@
         <li>
             <div class="product-item">
                 <div class="product-top">
-                    <a href="" class="product-thumb">
+                    <a href="/signin" class="product-thumb">
                         <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
                              alt="">
                     </a>
-                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
-                </div>
-                <div class="product-info">
-                    <a href="" class="product-cat"> bags</a>
-                    <a href="" class="product-name">name bag</a>
-                    <div class="product-price">500.000VND</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="product-item">
-                <div class="product-top">
-                    <a href="" class="product-thumb">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
-                             alt="">
-                    </a>
-                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
-                </div>
-                <div class="product-info">
-                    <a href="" class="product-cat"> bags</a>
-                    <a href="" class="product-name">name bag</a>
-                    <div class="product-price">500.000VND</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="product-item">
-                <div class="product-top">
-                    <a href="" class="product-thumb">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
-                             alt="">
-                    </a>
-                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
-                </div>
-                <div class="product-info">
-                    <a href="" class="product-cat"> bags</a>
-                    <a href="" class="product-name">name bag</a>
-                    <div class="product-price">500.000VND</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="product-item">
-                <div class="product-top">
-                    <a href="" class="product-thumb">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
-                             alt="">
-                    </a>
-                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
-                </div>
-                <div class="product-info">
-                    <a href="" class="product-cat"> bags</a>
-                    <a href="" class="product-name">name bag</a>
-                    <div class="product-price">500.000VND</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="product-item">
-                <div class="product-top">
-                    <a href="" class="product-thumb">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
-                             alt="">
-                    </a>
-                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
-                </div>
-                <div class="product-info">
-                    <a href="" class="product-cat"> bags</a>
-                    <a href="" class="product-name">name bag</a>
-                    <div class="product-price">500.000VND</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="product-item">
-                <div class="product-top">
-                    <a href="" class="product-thumb">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
-                             alt="">
-                    </a>
-                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
-                </div>
-                <div class="product-info">
-                    <a href="" class="product-cat"> bags</a>
-                    <a href="" class="product-name">name bag</a>
-                    <div class="product-price">500.000VND</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="product-item">
-                <div class="product-top">
-                    <a href="" class="product-thumb">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
-                             alt="">
-                    </a>
-                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
-                </div>
-                <div class="product-info">
-                    <a href="" class="product-cat"> bags</a>
-                    <a href="" class="product-name">name bag</a>
-                    <div class="product-price">500.000VND</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="product-item">
-                <div class="product-top">
-                    <a href="" class="product-thumb">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
-                             alt="">
-                    </a>
-                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                    <a href="" class="shopping-cart">ADD SHOPPING CART</a>
                 </div>
                 <div class="product-info">
                     <a href="" class="product-cat"> bags</a>
@@ -392,15 +296,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
