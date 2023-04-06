@@ -52,6 +52,9 @@
 
     .navbar-brand,
     .navbar .nav-link {
+        font-style: italic;
+        font-weight: 800;
+        font-stretch: 100%;
         color: White;
         text-decoration: none;
         display: inline-block;
@@ -135,6 +138,7 @@
 </nav>
 
 <style>
+
     .MainBoundary {
         margin-top: 5.5%;
         margin-bottom: 5.5%;
@@ -145,9 +149,12 @@
         margin-top: 5.5%;
         margin-bottom: 2.5%;
         text-align: center;
-        font-weight: bold;
-        font-family: "Times New Roman", Times, serif;
+        font-style: italic;
+        font-weight: 800;
+        font-stretch: 100%;
+        font-family: 'Open Sans', sans-serif;
         font-size: 200%;
+
     }
 
     table {
@@ -159,6 +166,7 @@
     }
 
     th {
+        font-style: italic;
         text-align: center;
         border: 1px solid blue;
         padding: 15px
@@ -169,6 +177,14 @@
         border: 1px solid blue;
         padding: 15px
     }
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+    }
+
 </style>
 
 <body>
@@ -183,24 +199,11 @@
             <th>Description</th>
             <th>Change</th>
         </tr>
-        <tr>
-            <td>Emil</td>
-            <td>Tobias</td>
-            <td>Linus</td>
-            <td>Emil</td>
-            <td>Tobias</td>
-            <td>Linus</td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>14</td>
-            <td>10</td>
-            <td>16</td>
-            <td>14</td>
-            <td>10</td>
-        </tr>
+        <tbody>
+        {shoppingcart}
+        </tbody>
     </table>
-
+    <div class></div>
 </div>
 </body>
 </html>
