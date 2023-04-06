@@ -1,6 +1,6 @@
 const http = require('http')
 const router = require('./controler/router')
-const handleControler = require('./controler/handle/error')
+const handleController = require('./controler/handle/error')
 http.createServer((req, res) => {
 
     let url = req.url
@@ -17,7 +17,7 @@ http.createServer((req, res) => {
     if (router[path]) {
         chosenHandle = router[path]
     } else {
-        chosenHandle = handleControler.shownotFound
+        chosenHandle = handleController.shownotFound
     }
     chosenHandle(req, res, id)
 

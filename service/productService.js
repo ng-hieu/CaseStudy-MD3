@@ -8,7 +8,7 @@ class ProductService {
     }
     showAll = () => {
         return new Promise((resolve, reject) => {
-            this.connect.query('select productId, nameProduct, priceProduct, quantityProduct from product_list', (error, data) => {
+            this.connect.query('select productId, nameProduct, priceProduct, quantityProduct, imageProduct from product_list', (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -19,7 +19,7 @@ class ProductService {
     }
     findById=(id)=>{
         return new Promise((resolve, reject) => {
-            this.connect.query(`select nameProduct,priceProduct,quantityProduct,descriptionProduct from product_list where productId=${id}`, (error, data) => {
+            this.connect.query(`select nameProduct,priceProduct,quantityProduct,descriptionProduct, imageProduct from product_list where productId=${id}`, (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
