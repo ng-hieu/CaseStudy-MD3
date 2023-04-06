@@ -3,47 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="test.css">
-
-
-    <style>
-        .navbar2 {
-            height: 100%;
-            width: 200px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #333;
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
-        .navbar2 a {
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 8px;
-            text-decoration: none;
-        }
-        .navbar2 a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        .test {
-            transform: translateX(220px);
-        }
-
-    </style>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+            integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+            integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+            crossorigin="anonymous"></script>
 </head>
-<body>
-<h3 style="text-align: center">PRODUCT TABLE</h3>
-<div class="test" >
+<style>
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Reseting CSS
+ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * Styling navigation bar for large screen devices
+     */
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: Black;
+    }
+
+    .navbar-left {
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    .navbar-right {
+        display: inline-block;
+        margin-right: 15px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .navbar-brand,
+    .navbar .nav-link {
+        color: White;
+        text-decoration: none;
+        display: inline-block;
+        padding: 15px;
+    }
+
+    .navbar-brand {
+        font-weight: bold;
+        padding-left: 30px;
+        padding-right: 30px;
+        background: RoyalBlue;
+    }
+
+    .navbar .nav-link:hover {
+        color: LightGray;
+    }
+
+    .navbar-collapse,
+    .navbar-toggler {
+        display: none;
+    }
+
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * Override styles to support mobile devices
+     */
+
+    @media (max-width: 842px) {
+        .navbar-right,
+        .navbar-left {
+            display: block;
+            border-top: 1px solid DimGray;
+        }
+
+        .navbar-right {
+            position: static;
+        }
+
+        .navbar .nav-link {
+            display: block;
+        }
+
+        .navbar-collapse:checked + .navbar {
+            max-height: 50px;
+            overflow: hidden;
+        }
+
+        .navbar-toggler {
+            color: White;
+            display: inline-block;
+            padding: 15px 25px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-left: 1px solid DimGray;
+            cursor: pointer;
+        }
+    }
+</style>
+
+<nav class="navbar" style="
+    padding-top: 0;
+    padding-bottom: 0;
+">
+    <div class="contronller">
+        <a class="navbar-brand" href="/home">
+            <h1> HOME </h1>
+        </a>
+
+        <div class="navbar-left">
+            <a class="nav-link" href="#">Link 1</a>
+            <a class="nav-link" href="#">Link 2</a>
+            <a class="nav-link" href="#">Link 3</a>
+            <a class="nav-link" href="#">Link 4</a>
+            <a class="nav-link" href="#">Link 5</a>
+        </div>
+
+        <div class="navbar-right">
+
+            <a class="nav-link" href="/signin">SIGN IN</a>
+            <a class="nav-link" href="#">SIGN OUT</a>
+        </div>
+    </div>
+</nav>
+
+<body>
+<div class="" style="margin-top: 120px;">
+    <center><h3>PRODUCT TABLE</h3></center>
     <form method="post">
         <table class="table table-striped">
             <thead>
@@ -63,35 +155,17 @@
 
     </form>
 </div>
-
-<div class="navbar2">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-    <a href="#">Link 4</a>
-    <a href="#">Link 5</a>
-</div>
-<div class="border-bottom-0">
-    <a href="#">sigIn</a>
-    <a href="#">sign out</a>
-</div>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
