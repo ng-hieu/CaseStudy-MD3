@@ -31,7 +31,17 @@ class UserService{
             })
         })
     }
-
+    editProductByAdmin = (id, products) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`UPDATE product_list p SET (p.nameProduct = '${products.nameProduct}', priceProduct = ${products.priceProduct}, quantityProduct = ${products.quantityProduct}, descriptionProduct = '${products.descriptionProduct}', categoryId = ${products.categoryId}, imageProduct = '${products.image}') WHERE (productId = id);`, (err, product)=>{
+                if(err){
+                    reject(err)
+                } else {
+                    resolve(product);
+                }
+            })
+        })
+    }
 
 
 

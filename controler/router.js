@@ -3,11 +3,10 @@ const  userController=require('./handle/userController');
 const router = {
     "home": productController.home,
     'add': productController.add,
-    'edit': productController.edit,
+    'edit': productController.editProductById,
     'descriptionProduct':productController.descriptionProduct,
     'signin': userController.signIn,
     'signup': userController.signUp,
-
 
 }
 
