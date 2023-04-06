@@ -16,8 +16,8 @@
 
 <style>
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Reseting CSS
- */
+  * Reseting CSS
+  */
     * {
         margin: 0;
         padding: 0;
@@ -29,6 +29,10 @@
      */
 
     .navbar {
+
+        padding-top: 0;
+        padding-bottom: 0;
+
         position: fixed;
         top: 0;
         left: 0;
@@ -69,10 +73,12 @@
     .navbar .nav-link:hover {
         color: LightGray;
     }
+
     .navbar-collapse,
     .navbar-toggler {
         display: none;
     }
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
      * Override styles to support mobile devices
      */
@@ -126,15 +132,14 @@
 
         <div class="navbar-right">
 
-            <a class="nav-link" href="/signin">SIGN IN</a>
-            <a class="nav-link" href="#">SIGN OUT</a>
+            <a class="nav-link" href="/signup">SIGN UP</a>
+
         </div>
     </div>
 </nav>
-
-<body>
+<body  style="margin-top: 75px;">
 <center>
-    <div class="" style=" position: relative; top:75px">
+    <div class="" style=" position: relative">
         <center><h3 style="color: blue"> Login</h3></center>
         <form action="" method="post" style="text-align: center">
             <input type="email" placeholder="email">
