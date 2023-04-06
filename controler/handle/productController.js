@@ -47,7 +47,14 @@ class ProductController {
             res.end();
         })
     }
-
+    descriptionProduct=(req,res,id)=>{
+        fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
+            let products = await productService.findById(id);
+            descriptionProductHtml = this.getHtmlProduct(products, descriptionProductHtml);
+            res.write(descriptionProductHtml);
+            res.end();
+        })
+    }
 }
 
 module.exports = new ProductController()

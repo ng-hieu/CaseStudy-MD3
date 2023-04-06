@@ -5,6 +5,8 @@ const router = {
     'signup': productController.signUp,
     'add': productController.add,
     'edit': productController.edit,
+    'descriptionProduct':productController.descriptionProduct,
+
 }
 
 module.exports = router;

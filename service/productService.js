@@ -17,6 +17,18 @@ class ProductService {
             })
         })
     }
+    findById=(id)=>{
+        return new Promise((resolve, reject) => {
+            this.connect.query(`select nameProduct,priceProduct,quantityProduct,descriptionProduct from product_list where productId=${id}`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+
+    }
 }
 
 module.exports = new ProductService();
