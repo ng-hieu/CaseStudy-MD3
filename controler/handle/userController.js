@@ -29,10 +29,24 @@ class userController {
 
     }
     signUp = (req, res) => {
-        fs.readFile("./view/sign/signUp.html", "utf-8", async (error, signUpHtml) => {
-            res.write(signUpHtml);
-            res.end();
-        })
+        if (req.method==="GET"){
+            fs.readFile("./view/sign/signUp.html", "utf-8", async (error, signUpHtml) => {
+                res.write(signUpHtml);
+                res.end();
+            })
+        }else {
+            let data='';
+            req.on('data',chunk =>{
+                data+=chunk;
+            })
+            req.on('end', async ()=>{
+                let userData=qs.parse(data);
+                await userSevice.addUser(userData);
+                res.writeHead(301,{'location':"/signin"});
+                res.end();
+            })
+        }
+
     }
 }
 
