@@ -28,10 +28,13 @@
 
     .navbar {
         position: fixed;
+        z-index: 99999;
         top: 0;
         left: 0;
         width: 100%;
         background: Black;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     .navbar-left {
@@ -106,14 +109,10 @@
             cursor: pointer;
         }
     }
-    div .product {
-        display: flex;
-    }
-
 </style>
+
 <body>
-<main></main>
-<nav class="navbar" style=" padding-top: 0; padding-bottom: 0;">
+<nav class="navbar">
     <div class="contronller">
         <a class="navbar-brand" href="/home">
             HOME
@@ -130,9 +129,279 @@
         <div class="navbar-right">
 
             <a class="nav-link" href="/signin">SIGN IN</a>
-            <a class="nav-link" href="#">SIGN OUT</a>
+            <a class="nav-link" href="/signup">SIGN UP</a>
         </div>
     </div>
 </nav>
+<style>
+    /*Li va Ul*/
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
+
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+
+    }
+
+    #wrapper {
+        max-width: 1170px;
+        margin: 0 auto;
+    }
+
+    .headline {
+        text-align: center;
+        margin-top: 75px;
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 18px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        border: 1px solid #bebebe;
+        display: inline-block;
+        color: #555;
+        font-weight: 600;
+    }
+
+    ul.products {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    ul.products li {
+        flex-basis: 25%;
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+        margin-bottom: 30px;
+    }
+
+    ul.products li img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    ul.products li .product-top {
+        position: relative;
+        overflow: hidden;
+    }
+
+    ul.products li .product-top .product-thumb {
+        display: block;
+    }
+
+    ul.products li:hover .product-top .product-thumb img {
+        filter: opacity(80%);
+    }
+
+    ul.products li .product-top .product-thumb img {
+        display: block;
+
+    }
+
+    ul.products li .product-top a.shopping-cart {
+        text-transform: uppercase;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+        background-color: darkgray;
+        padding: 10px 0;
+        position: absolute;
+        bottom: -36px;
+        width: 100%;
+        transition: 0.25s ease-in-out;
+        opacity: 0.75;
+    }
+
+    ul.products li:hover a.shopping-cart {
+        bottom: 0;
+    }
+
+    ul.products li .product-info {
+        padding: 20px 0;
+    }
+
+    ul.products li .product-info a {
+        display: block;
+        text-decoration: none;
+    }
+
+    ul.products li .product-info a.product-cat {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: green;
+        padding: 3px 0;
+    }
+
+    ul.products li .product-info a.product-name {
+        color: greenyellow;
+        padding: 3px 0;
+    }
+
+    ul.products li .product-info .product-price {
+        color: aqua;
+        padding: 2px 0;
+        font-weight: 600;
+    }
+</style>
+<div id="wrapper">
+    <div class="headline">
+        <h1>shop ba con sói hướng nội</h1>
+    </div>
+    <ul class="products">
+        <li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="" class="product-thumb">
+                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat"> bags</a>
+                    <a href="" class="product-name">name bag</a>
+                    <div class="product-price">500.000VND</div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="" class="product-thumb">
+                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat"> bags</a>
+                    <a href="" class="product-name">name bag</a>
+                    <div class="product-price">500.000VND</div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="" class="product-thumb">
+                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat"> bags</a>
+                    <a href="" class="product-name">name bag</a>
+                    <div class="product-price">500.000VND</div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="" class="product-thumb">
+                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat"> bags</a>
+                    <a href="" class="product-name">name bag</a>
+                    <div class="product-price">500.000VND</div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="" class="product-thumb">
+                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat"> bags</a>
+                    <a href="" class="product-name">name bag</a>
+                    <div class="product-price">500.000VND</div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="" class="product-thumb">
+                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat"> bags</a>
+                    <a href="" class="product-name">name bag</a>
+                    <div class="product-price">500.000VND</div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="" class="product-thumb">
+                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat"> bags</a>
+                    <a href="" class="product-name">name bag</a>
+                    <div class="product-price">500.000VND</div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="" class="product-thumb">
+                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">Thêm vào giỏ hàng</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat"> bags</a>
+                    <a href="" class="product-name">name bag</a>
+                    <div class="product-price">500.000VND</div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
