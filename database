@@ -1,115 +1,178 @@
--- MySQL Workbench Forward Engineering
+CREATE DATABASE  IF NOT EXISTS `case_study_md3` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `case_study_md3`;
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+--
+-- Host: localhost    Database: case_study_md3
+-- ------------------------------------------------------
+-- Server version	8.0.32
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema case_study_md3
--- -----------------------------------------------------
+--
+-- Table structure for table `category_list`
+--
 
--- -----------------------------------------------------
--- Schema case_study_md3
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `case_study_md3` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `case_study_md3` ;
-
--- -----------------------------------------------------
--- Table `case_study_md3`.`category_list`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `case_study_md3`.`category_list` (
-  `categoryId` INT NOT NULL AUTO_INCREMENT,
-  `nameCategory` VARCHAR(150) NOT NULL,
+DROP TABLE IF EXISTS `category_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `category_list` (
+  `categoryId` int NOT NULL AUTO_INCREMENT,
+  `nameCategory` varchar(150) NOT NULL,
   PRIMARY KEY (`categoryId`),
-  UNIQUE INDEX `nameCategory_UNIQUE` (`nameCategory` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  UNIQUE KEY `nameCategory_UNIQUE` (`nameCategory`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `category_list`
+--
 
--- -----------------------------------------------------
--- Table `case_study_md3`.`user_list`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `case_study_md3`.`user_list` (
-  `userId` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(16) NOT NULL,
-  `nameUser` VARCHAR(75) NOT NULL,
-  `ageUser` INT NOT NULL,
-  `phoneUser` INT NOT NULL,
-  `addressUser` VARCHAR(150) NOT NULL,
-  `roleUser` TINYINT NOT NULL,
-  PRIMARY KEY (`userId`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+LOCK TABLES `category_list` WRITE;
+/*!40000 ALTER TABLE `category_list` DISABLE KEYS */;
+INSERT INTO `category_list` VALUES (10,'Extra lubricant '),(7,'Extra Safe'),(1,'Invisible'),(2,'Performance'),(11,'Smell'),(3,'Spiky'),(9,'Super Thin'),(8,'Thin');
+/*!40000 ALTER TABLE `category_list` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Table structure for table `order_detail`
+--
 
--- -----------------------------------------------------
--- Table `case_study_md3`.`order_list`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `case_study_md3`.`order_list` (
-  `orderId` INT NOT NULL AUTO_INCREMENT,
-  `timeOrder` DATETIME NOT NULL,
-  `totaleCost` FLOAT NOT NULL,
-  `statusOrder` TINYINT NOT NULL,
-  `userId` INT NOT NULL,
+DROP TABLE IF EXISTS `order_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order_detail` (
+  `orderId` int NOT NULL,
+  `productId` int NOT NULL,
+  `priceCurrent` float NOT NULL,
+  `quantity` int DEFAULT NULL,
+  KEY `orderId_idx` (`orderId`),
+  KEY `productId_idx` (`productId`),
+  CONSTRAINT `orderId` FOREIGN KEY (`orderId`) REFERENCES `order_list` (`orderId`),
+  CONSTRAINT `productId` FOREIGN KEY (`productId`) REFERENCES `product_list` (`productId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_detail`
+--
+
+LOCK TABLES `order_detail` WRITE;
+/*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
+INSERT INTO `order_detail` VALUES (1,2,77000,1),(1,2,77000,1),(1,4,90000,2),(1,5,320000,2),(1,13,315000,3),(2,3,315000,4),(2,4,90000,3),(2,9,150000,1),(3,5,320000,2),(3,4,90000,3),(4,6,125000,1),(4,5,320000,5),(5,8,280000,3);
+/*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_list`
+--
+
+DROP TABLE IF EXISTS `order_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order_list` (
+  `orderId` int NOT NULL AUTO_INCREMENT,
+  `timeOrder` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `totaleCost` float DEFAULT NULL,
+  `statusOrder` tinyint NOT NULL,
+  `userId` int NOT NULL,
   PRIMARY KEY (`orderId`),
-  INDEX `userId_idx` (`userId` ASC) VISIBLE,
-  CONSTRAINT `userId`
-    FOREIGN KEY (`userId`)
-    REFERENCES `case_study_md3`.`user_list` (`userId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  KEY `userId_idx` (`userId`),
+  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user_list` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `order_list`
+--
 
--- -----------------------------------------------------
--- Table `case_study_md3`.`product_list`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `case_study_md3`.`product_list` (
-  `productId` INT NOT NULL AUTO_INCREMENT,
-  `nameProduct` VARCHAR(150) NOT NULL,
-  `priceProduct` FLOAT NOT NULL,
-  `quantityProduct` INT NOT NULL,
-  `descriptionProduct` VARCHAR(200) NOT NULL,
-  `categoryId` INT NOT NULL,
-  `imageProduct` VARCHAR(10000) NOT NULL,
+LOCK TABLES `order_list` WRITE;
+/*!40000 ALTER TABLE `order_list` DISABLE KEYS */;
+INSERT INTO `order_list` VALUES (1,'2023-04-06 13:45:11',NULL,1,2),(2,'2023-04-06 13:45:11',NULL,1,4),(3,'2023-04-06 13:45:11',NULL,1,3),(4,'2023-04-06 13:45:11',NULL,1,4),(5,'2023-04-06 13:45:11',NULL,1,2);
+/*!40000 ALTER TABLE `order_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_list`
+--
+
+DROP TABLE IF EXISTS `product_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_list` (
+  `productId` int NOT NULL AUTO_INCREMENT,
+  `nameProduct` varchar(150) NOT NULL,
+  `priceProduct` float NOT NULL,
+  `quantityProduct` int NOT NULL,
+  `descriptionProduct` varchar(200) NOT NULL,
+  `categoryId` int NOT NULL,
+  `imageProduct` varchar(10000) NOT NULL,
   PRIMARY KEY (`productId`),
-  INDEX `categoryId_idx` (`categoryId` ASC) VISIBLE,
-  CONSTRAINT `categoryId`
-    FOREIGN KEY (`categoryId`)
-    REFERENCES `case_study_md3`.`category_list` (`categoryId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  KEY `categoryId_idx` (`categoryId`),
+  CONSTRAINT `categoryId` FOREIGN KEY (`categoryId`) REFERENCES `category_list` (`categoryId`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `product_list`
+--
 
--- -----------------------------------------------------
--- Table `case_study_md3`.`order_detail`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `case_study_md3`.`order_detail` (
-  `orderId` INT NOT NULL,
-  `productId` INT NOT NULL,
-  `priceCurrent` FLOAT NOT NULL,
-  `quantity` INT NOT NULL,
-  INDEX `orderId_idx` (`orderId` ASC) VISIBLE,
-  INDEX `productId_idx` (`productId` ASC) VISIBLE,
-  CONSTRAINT `orderId`
-    FOREIGN KEY (`orderId`)
-    REFERENCES `case_study_md3`.`order_list` (`orderId`),
-  CONSTRAINT `productId`
-    FOREIGN KEY (`productId`)
-    REFERENCES `case_study_md3`.`product_list` (`productId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+LOCK TABLES `product_list` WRITE;
+/*!40000 ALTER TABLE `product_list` DISABLE KEYS */;
+INSERT INTO `product_list` VALUES (2,'Durex Performance(3 chiếc)',77000,250,'Có chất gây tê, giúp kéo dài thời gian quan hệ.',2,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2F00002672-durex-performa-3s-9758-5f62_large.jpg?alt=media&token=bd5734aa-4edc-4b0d-951f-ea30b2238141'),(3,'Durex Performance(10 chiếc)',315000,250,'Có chất gây tê, giúp kéo dài thời gian quan hệ. Một hộp có nhiều hơn, dùng nhiều hơn',2,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2F88af8594af36e74652eee5d318eca23a.png?alt=media&token=1ba9c351-4543-48de-9753-f5b34bf3c470'),(4,'Durex Invisible(3 chiếc)',90000,300,'Mỏng hơn, cảm giác chân thật hơn',1,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2FBAO-CAO-SU-INVISIBLE.jpg?alt=media&token=a27a43a3-f186-45e5-981f-3686bf04d651'),(5,'Durex Invisible(10 chiếc)',320000,300,'Mỏng hơn, cảm giác chân thật hơn',1,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2Fbao-cao-su-durex-invisible-extra-lubricated-hop-10-cai-972.jpg?alt=media&token=afdcfb0b-bcc5-43e4-bb99-1dbd7c8263f1'),(6,'PlayAh xanh (10 chiếc)',125000,500,'Không mùi latex, cảm giác chân thật hơn',8,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2Fbao-cao-su-playah-super-invisible-sieu-mong.jpg?alt=media&token=4f39da76-98de-4849-a3ea-b7a831afe7f7'),(7,'okamoto 0.01(4 chiếc)',250000,320,'Siêu mỏng, dùng như không dùng',9,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2F0d3854a53989913184057d8635551ac9.png?alt=media&token=b5ea0b54-a579-4878-a172-b987c214edda'),(8,'Olo gai (10 chiếc)',280000,400,'Có gai, siêu mỏng, đưa bạn nữ lên đỉnh',3,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2F6aec427fecf2cf0e1a8557f157c2ba23.jpg?alt=media&token=85e74761-e513-4601-b1c0-58bf890e7f94'),(9,'Krambi trắng (12 chiếc)',150000,325,'Bao cao su có độ mỏng là 0.25, sản xuất tại Thái Lan',8,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2Fbao-cao-su-krabi-sieu-mong-ultrathin-600x315w.jpg?alt=media&token=d1cb8945-03f6-4195-9e42-fbfeb13ff559'),(10,'Real003',319000,320,'Bao cao su đến từ Hàn Quốc. Không có mùi latex khó chịu',9,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2Feve-real-003-10p-1.jpg?alt=media&token=9742d32e-770e-4f48-836d-0a018bf4d23c'),(11,'Durex sensual strawbery',50000,150,'Bao cao su có mùi dâu tây, giúp cuộc yêu thăng hoa hơn',11,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2Fdurex-sensual-huong-dau-52mm-hop-3-chiec-1.jpg?alt=media&token=0de3bd1a-c7a3-4749-9438-24f3d7b2c245'),(12,'Durex naughty chocolate',45000,150,'Bao cao su có mùi socola, giúp cuộc yêu thăng hoa hơn',11,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2Fdurex-naughty-chocolate-52mm-hop-3-chiec-1.jpg?alt=media&token=1a35a15f-c48d-4715-ab45-ea58ba9554d9'),(13,'Durex invisible extra lubricant (10 chiếc)',315000,230,'Bao cao su siêu mỏng có thêm 25% nước bôi trơn',10,'https://firebasestorage.googleapis.com/v0/b/case-studymd3.appspot.com/o/images%2Fimage%2Fbao-cao-su-durex-invisible-extra-lubricated-hop-10-cai-972.jpg?alt=media&token=afdcfb0b-bcc5-43e4-bb99-1dbd7c8263f1');
+/*!40000 ALTER TABLE `product_list` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Table structure for table `user_list`
+--
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+DROP TABLE IF EXISTS `user_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_list` (
+  `userId` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `nameUser` varchar(75) NOT NULL,
+  `ageUser` int NOT NULL,
+  `phoneUser` int NOT NULL,
+  `addressUser` varchar(150) NOT NULL,
+  `roleUser` tinyint NOT NULL,
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_list`
+--
+
+LOCK TABLES `user_list` WRITE;
+/*!40000 ALTER TABLE `user_list` DISABLE KEYS */;
+INSERT INTO `user_list` VALUES (1,'Admin@gmail.com','Admin1234','Admin',25,1900100,'Ha Noi',0),(2,'DuyVu@gmail.com','DuyVu1234','DuyVu',26,366338338,'Thai Binh',1),(3,'PhongLe@gmail.com','PhongLe1234','PhongLe',24,987878743,'Hau Giang',1),(4,'QuocMinh@gmail.com','QuocMinh1234','QuocMinh',18,964994932,'Ha Noi',1);
+/*!40000 ALTER TABLE `user_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'case_study_md3'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-04-06 14:07:16
