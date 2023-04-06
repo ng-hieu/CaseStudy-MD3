@@ -1,11 +1,8 @@
 const fs = require('fs');
 const qs = require('qs');
 const userSevice = require('../../service/userSevice');
-<<<<<<< HEAD
 const cateroryService = require('../../service/categoryService')
-=======
 const cookie = require('cookie');
->>>>>>> 195da054e085215680b3e601854be3297e023c06
 
 class userController {
     signIn = (req, res) => {
@@ -56,8 +53,8 @@ class userController {
                 res.end();
             })
         }
-<<<<<<< HEAD
     }
+
     addProduct =  (req,res)=>{
         if(req.method==='GET'){
             fs.readFile('./view/admin/addProduct.html', 'utf-8',  async (err, addHtml) => {
@@ -82,9 +79,6 @@ class userController {
                 res.end();
             })
         }
-
-=======
->>>>>>> 195da054e085215680b3e601854be3297e023c06
     }
 }
 

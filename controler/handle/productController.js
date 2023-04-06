@@ -9,7 +9,9 @@ class ProductController {
                 <th scope="row">${values.productId}</th>
                 <td>${products.nameProduct}</td>
                 <td>${values.quantityProduct}</td>
-                <td>${values.descriptionProduct}</td>`
+                <td>${values.descriptionProduct}</td>
+                <td>${values.categoryId}</td>
+                <td>${values.imageProduct}</td>`
         })
         indexHtml = indexHtml.replace(`{product}`, productHtml);
         return indexHtml;
