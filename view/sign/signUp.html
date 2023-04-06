@@ -14,9 +14,18 @@
             crossorigin="anonymous"></script>
 </head>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+        margin-top: 75px
+    }
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  * Reseting CSS
-  */
+ * Reseting CSS
+ */
     * {
         margin: 0;
         padding: 0;
@@ -28,16 +37,20 @@
      */
 
     .navbar {
-
-        padding-top: 0;
-        padding-bottom: 0;
-
         position: fixed;
+        z-index: 99999;
         top: 0;
         left: 0;
         width: 100%;
         background: Black;
+        padding-top: 0;
+        padding-bottom: 0;
+        font-size: 15px
+    }
+    .navbar-brand {
+        width: 100px;
 
+        display: inline-block;
     }
 
     .navbar-left {
@@ -120,7 +133,7 @@
         </a>
 
         <div class="navbar-left">
-            <a class="nav-link" href="#">Link 1</a>
+            <a class="nav-link" href="/addProduct">add Product</a>
             <a class="nav-link" href="#">Link 2</a>
             <a class="nav-link" href="#">Link 3</a>
             <a class="nav-link" href="#">Link 4</a>
@@ -129,8 +142,8 @@
 
         <div class="navbar-right">
 
+            <a class="nav-link" href="/signin">SIGN IN</a>
             <a class="nav-link" href="/signup">SIGN UP</a>
-
         </div>
     </div>
 </nav>
