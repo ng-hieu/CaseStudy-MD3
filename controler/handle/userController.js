@@ -1,6 +1,8 @@
 const fs = require('fs');
-const qs=require('qs');
+const qs = require('qs');
 const userSevice = require('../../service/userSevice');
+const cookie = require('cookie');
+
 class userController {
     signIn = (req, res) => {
         if (req.method === "GET") {
@@ -8,19 +10,23 @@ class userController {
                 res.write(signInHtml);
                 res.end();
             })
-        }else {
-            let data='';
-            req.on('data',chunk=>{
-                data+=chunk;
+        } else {
+            let data = '';
+            req.on('data', chunk => {
+                data += chunk;
             })
-            req.on('end',  async ()=>{
+            req.on('end', async () => {
                 let user = qs.parse(data);
-                let account= await userSevice.getUser(user);
-                if (account.length===0){
-                    res.writeHead(301,{'location':"/"});
+                let account = await userSevice.getUser(user);
+                if (account.length === 0) {
+                    res.writeHead(301, {'location': "/"});
                     res.end();
-                }else {
-                    res.writeHead(301,{'location':"/home"});
+                } else {
+                    res.setHeader('Set-Cookie', cookie.serialize('user', JSON.stringify(account[0]), {
+                        httpOnly: true,
+                        maxAge: 60 * 60 * 24 * 7 // 1 week
+                    }));
+                    res.writeHead(301, {'location': "/home"});
                     res.end();
                 }
 
@@ -29,20 +35,20 @@ class userController {
 
     }
     signUp = (req, res) => {
-        if (req.method==="GET"){
+        if (req.method === "GET") {
             fs.readFile("./view/sign/signUp.html", "utf-8", async (error, signUpHtml) => {
                 res.write(signUpHtml);
                 res.end();
             })
-        }else {
-            let data='';
-            req.on('data',chunk =>{
-                data+=chunk;
+        } else {
+            let data = '';
+            req.on('data', chunk => {
+                data += chunk;
             })
-            req.on('end', async ()=>{
-                let userData=qs.parse(data);
+            req.on('end', async () => {
+                let userData = qs.parse(data);
                 await userSevice.addUser(userData);
-                res.writeHead(301,{'location':"/signin"});
+                res.writeHead(301, {'location': "/signin"});
                 res.end();
             })
         }
