@@ -1,18 +1,28 @@
 const fs = require('fs')
 const productService = require('../../service/productService');
-const cookie=require('cookie');
+
 class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
         products.map(values => {
-            productHtml += `<tr>    
-                <th scope="row">${values.productId}</th>
-                <td>${products.nameProduct}</td>
-                <td>${values.quantityProduct}</td>
-                <td>${values.descriptionProduct}</td>
-                <td>${values.categoryId}</td>
-                <td>${values.imageProduct}</td>`
+            productHtml += `<li>
+            <div class="product-item">
+                <div class="product-top">
+                    <a href="/signin" class="product-thumb">
+                        <img src="${values.imageProduct}"
+                             alt="">
+                    </a>
+                    <a href="" class="shopping-cart">ADD SHOPPING CART</a>
+                </div>
+                <div class="product-info">
+                    <a href="" class="product-cat" > ${values.nameCategory}</a>                  
+                    <a href="" class="product-name">${values.nameProduct}</a>
+                    <div class="product-price">${values.priceProduct}</div>
+                </div>
+            </div>
+        </li>`
         })
+
         indexHtml = indexHtml.replace(`{product}`, productHtml);
         return indexHtml;
     }
