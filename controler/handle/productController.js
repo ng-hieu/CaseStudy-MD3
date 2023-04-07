@@ -1,6 +1,7 @@
 const fs = require('fs')
 const productService = require('../../service/productService');
-const cookie=require('cookie');
+const cookie = require('cookie');
+
 class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
@@ -9,7 +10,7 @@ class ProductController {
         `<li>
             <div class="product-item">
                 <div class="product-top">
-                    <a href="/signin" class="product-thumb">
+                    <a href="/descriptionProduct/${parseInt(values.productId)}" class="product-thumb">
                         <img src="${values.imageProduct}"
                              alt="">
                     </a>
@@ -30,8 +31,8 @@ class ProductController {
 
     home = (req, res) => {
         let cookies = cookie.parse(req.headers.cookie || '');
-        if (cookies.user){
-            let user=JSON.parse(cookies.user);
+        if (cookies.user) {
+            let user = JSON.parse(cookies.user);
             fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
                 let products = await productService.showAll();
                 indexHtml = this.getHtmlProduct(products, indexHtml);
@@ -45,8 +46,8 @@ class ProductController {
     }
     homeBfsign = (req, res) => {
         let cookies = cookie.parse(req.headers.cookie || '');
-        if (cookies.user){
-            let user=JSON.parse(cookies.user);
+        if (cookies.user) {
+            let user = JSON.parse(cookies.user);
             fs.readFile("./view/homeBfSign.html", "utf-8", async (error, homeBfSignHtml) => {
                 let products = await productService.showAll();
                 homeBfSignHtml = this.getHtmlProduct(products, homeBfSignHtml);
@@ -60,10 +61,14 @@ class ProductController {
     }
 
 
-    descriptionProduct=(req,res,id)=>{
+    descriptionProduct = (req, res, id) => {
         fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
             let products = await productService.findById(id);
-            descriptionProductHtml = this.getHtmlProduct(products, descriptionProductHtml);
+            descriptionProductHtml=descriptionProductHtml.replace("{image}",products.imageProduct)
+            descriptionProductHtml=descriptionProductHtml.replace("{descriptionName}",products.nameProduct)
+            descriptionProductHtml=descriptionProductHtml.replace("{descriptionPrice}",products.priceProduct)
+            descriptionProductHtml=descriptionProductHtml.replace("{descriptionDescription}",products.descriptionProduct)
+            descriptionProductHtml=descriptionProductHtml.replace("{descriptionQuantity}",products.quantityProduct)
             res.write(descriptionProductHtml);
             res.end();
         })
