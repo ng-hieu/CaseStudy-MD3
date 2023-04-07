@@ -29,7 +29,6 @@ class ProductController {
             </div>
         </li>`
         })
-
         indexHtml = indexHtml.replace(`{product}`, productHtml);
         return indexHtml;
     }
@@ -69,16 +68,13 @@ class ProductController {
     descriptionProduct = (req, res, id) => {
         fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
             let products = await productService.findById(id);
-<<<<<<< HEAD
             descriptionProductHtml=descriptionProductHtml.replace("{image}",products.imageProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionName}",products.nameProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionPrice}",products.priceProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionDescription}",products.descriptionProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionQuantity}",products.quantityProduct)
-=======
             descriptionProductHtml = this.getHtmlProduct(products, descriptionProductHtml);
             console.log(descriptionProductHtml  )
->>>>>>> da250c148e8e2ca280a20307ebb45271da309e31
             res.write(descriptionProductHtml);
             res.end();
         })
