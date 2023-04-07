@@ -2,13 +2,8 @@ const fs = require('fs');
 const qs = require('qs');
 const userSevice = require('../../service/userSevice');
 const cateroryService = require('../../service/categoryService')
-<<<<<<< HEAD
-const cookie = require('cookie');
-=======
-
 const cookie = require('cookie');
 
->>>>>>> efb96e953379afb11e17f893f056c4cd2254732a
 
 class userController {
     signIn = (req, res) => {
@@ -60,18 +55,11 @@ class userController {
             })
         }
     }
-<<<<<<< HEAD
 
-    addProduct =  (req,res)=>{
-        if(req.method==='GET'){
-            fs.readFile('./view/admin/addProduct.html', 'utf-8',  async (err, addHtml) => {
-                let categories  = await cateroryService.showAll()
-=======
     addProduct = (req, res) => {
         if (req.method === 'GET') {
             fs.readFile('./view/admin/addProduct.html', 'utf-8', async (err, addHtml) => {
                 let categories = await cateroryService.showAll()
->>>>>>> efb96e953379afb11e17f893f056c4cd2254732a
                 let htmlCategory = '';
                 categories.map(item => {
                     htmlCategory += `<option value="${item.categoryId}">${item.nameCategory}</option>'`
@@ -92,11 +80,7 @@ class userController {
                 res.end();
             })
         }
-<<<<<<< HEAD
-=======
 
-
->>>>>>> efb96e953379afb11e17f893f056c4cd2254732a
     }
 }
 
