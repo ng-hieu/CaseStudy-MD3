@@ -7,11 +7,11 @@ class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
         products.map(values => {
-            productHtml +=
-        `<li>
+
+            productHtml += `<li>
             <div class="product-item">
                 <div class="product-top">
-                    <a href="/descriptionProduct/${parseInt(values.productId)}" class="product-thumb">
+                    <a href="/descriptionProduct/${values.productId}" class="product-thumb">
                         <img src="${values.imageProduct}"
                              alt="">
                     </a>
@@ -22,13 +22,14 @@ class ProductController {
                     <a href="#" class="shopping-cart" onclick="document.getElementById('form-${values.productId}').submit()">ADD SHOPPING CART</a>
                 </div>
                 <div class="product-info">
-                    <a href="" class="product-cat">Bao cao su</a>
+                    <a href="" class="product-cat" > ${values.nameCategory}</a>                  
                     <a href="" class="product-name">${values.nameProduct}</a>
                     <div class="product-price">${values.priceProduct}</div>
                 </div>
             </div>
         </li>`
         })
+
         indexHtml = indexHtml.replace(`{product}`, productHtml);
         return indexHtml;
     }
@@ -73,8 +74,6 @@ class ProductController {
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionPrice}",products.priceProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionDescription}",products.descriptionProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionQuantity}",products.quantityProduct)
-            descriptionProductHtml = this.getHtmlProduct(products, descriptionProductHtml);
-            console.log(descriptionProductHtml  )
             res.write(descriptionProductHtml);
             res.end();
         })
