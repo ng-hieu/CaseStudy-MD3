@@ -5,13 +5,12 @@ const router = {
     'edit': userController.editProductById,
     'homeAdmin': userController.showProductInAdmin,
     'descriptionProduct':productController.descriptionProduct,
-
-
     'signin': userController.signIn,
     'signup': userController.signUp,
     'addProduct': userController.addProduct,
     "":productController.homeBfsign,
-    "signout":productController.homeBfsign
+    "signout":productController.homeBfsign,
+    "delete": userController.deleteProductById,
 }
 
 module.exports = router;

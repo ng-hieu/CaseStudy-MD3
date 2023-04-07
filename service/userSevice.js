@@ -10,7 +10,7 @@ class UserService {
 
     getUser = (user) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`select email, password
+            this.connect.query(`select email, password,roleUser
                                 from user_list
                                 where email = '${user.email}'
                                   and password = '${user.password}'`, (error, user) => {
@@ -57,6 +57,17 @@ class UserService {
     editProductByAdmin = (id, products) => {
         return new Promise((resolve, reject) => {
             this.connect.query(`UPDATE product_list SET nameProduct = '${products.nameProduct}', priceProduct = ${products.priceProduct}, quantityProduct = ${products.quantityProduct}, descriptionProduct = '${products.descriptionProduct}', categoryId = ${products.categoryId}, imageProduct = '${products.image}' WHERE (productId = ${id});`, (err, product)=>{
+                if(err){
+                    reject(err)
+                } else {
+                    resolve(product);
+                }
+            })
+        })
+    }
+    deleteProductByAdmin = (id) => {
+        return new Promise((resolve, reject)=>{
+            this.connect.query(`DELETE FROM product_list WHERE (productId = ${id});`, (err, product)=>{
                 if(err){
                     reject(err)
                 } else {

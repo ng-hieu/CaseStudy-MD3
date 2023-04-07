@@ -19,6 +19,7 @@ class userController {
             })
             req.on('end', async () => {
                 let user = qs.parse(data);
+                console.log(user);
                 let account = await userSevice.getUser(user);
                 if (account.length === 0) {
                     res.writeHead(301, {'location': "/"});
@@ -28,8 +29,14 @@ class userController {
                         httpOnly: true,
                         maxAge: 60 * 60 * 24 * 7 // 1 week
                     }));
-                    res.writeHead(301, {'location': "/home"});
-                    res.end();
+                    if (account[0].roleUser===1){
+                        res.writeHead(301, {'location': "/home"});
+                        res.end();
+                    }else {
+                        res.writeHead(301, {'location': "/homeAdmin"});
+                        res.end();
+                    }
+
                 }
 
             })
@@ -73,7 +80,7 @@ class userController {
                     <div class="product-price">${values.priceProduct}</div>
                     <div>
                         <a type="button" href="/edit/${values.productId}">Sửa</a>
-                        <button type="submit">Xóa</button>
+                        <a type="button" href="/delete/${values.productId}">Xóa</a>
                     </div>
                 </div>
             </div>
@@ -161,6 +168,11 @@ class userController {
                 res.end();
             })
         }
+    }
+    deleteProductById = async (req, res, id) =>{
+        await userSevice.deleteProductByAdmin(id);
+        res.writeHead(301, {'location':'/homeAdmin'});
+        res.end();
     }
 }
 
