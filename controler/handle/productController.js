@@ -1,5 +1,6 @@
 const fs = require('fs')
 const productService = require('../../service/productService');
+const cookie = require('cookie');
 
 class ProductController {
     getHtmlProduct = (products, indexHtml) => {
