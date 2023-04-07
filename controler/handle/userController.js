@@ -19,6 +19,7 @@ class userController {
             })
             req.on('end', async () => {
                 let user = qs.parse(data);
+                console.log(user);
                 let account = await userSevice.getUser(user);
                 if (account.length === 0) {
                     res.writeHead(301, {'location': "/"});

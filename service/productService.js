@@ -15,7 +15,8 @@ class ProductService {
                                        p.quantityProduct,
                                        p.descriptionProduct,
                                        c.nameCategory,
-                                       p.imageProduct
+                                       p.imageProduct,
+                                       p.productId
                                 from product_list p
                                          join category_list c on p.categoryId = c.categoryId`, (error, data) => {
                 if (error) {

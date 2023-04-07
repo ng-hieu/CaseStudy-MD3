@@ -14,7 +14,11 @@ class ProductController {
                         <img src="${values.imageProduct}"
                              alt="">
                     </a>
-                    <a href="" class="shopping-cart">ADD SHOPPING CART</a>
+                    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+                    <form action="/signin" method="post" target="dummyframe" id="form-${values.productId}">
+                     <input type="number" value="${values.productId}" name="id" hidden>
+                        </form>
+                    <a href="#" class="shopping-cart" onclick="document.getElementById('form-${values.productId}').submit()">ADD SHOPPING CART</a>
                 </div>
                 <div class="product-info">
                     <a href="" class="product-cat" > ${values.nameCategory}</a>                  
