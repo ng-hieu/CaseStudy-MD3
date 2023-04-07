@@ -1,10 +1,9 @@
 const fs = require('fs');
 const qs = require('qs');
 const userSevice = require('../../service/userSevice');
+const cateroryService = require('../../service/categoryService')
 
 const cookie = require('cookie');
-
-const cateroryService = require('../../service/categoryService')
 
 
 class userController {
@@ -56,30 +55,28 @@ class userController {
                 res.end();
             })
         }
-
-
     }
-    addProduct =  (req,res)=>{
-        if(req.method==='GET'){
-            fs.readFile('./view/admin/addProduct.html', 'utf-8',  async (err, addHtml) => {
-                let categories  = await cateroryService.showAll()
+    addProduct = (req, res) => {
+        if (req.method === 'GET') {
+            fs.readFile('./view/admin/addProduct.html', 'utf-8', async (err, addHtml) => {
+                let categories = await cateroryService.showAll()
                 let htmlCategory = '';
-                categories.map(item =>{
+                categories.map(item => {
                     htmlCategory += `<option value="${item.categoryId}">${item.nameCategory}</option>'`
                 })
-                addHtml = addHtml.replace('{categories}',htmlCategory)
+                addHtml = addHtml.replace('{categories}', htmlCategory)
                 res.write(addHtml)
                 res.end()
             })
-        }else {
+        } else {
             let data = '';
-            req.on('data',chuck=>{
+            req.on('data', chuck => {
                 data += chuck
             })
-            req.on('end',async ()=>{
+            req.on('end', async () => {
                 let addProduct = qs.parse(data)
                 await userSevice.addProduct(addProduct)
-                res.writeHead(301,{'location':'/home'})
+                res.writeHead(301, {'location': '/home'})
                 res.end();
             })
         }

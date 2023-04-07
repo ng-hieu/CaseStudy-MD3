@@ -30,6 +30,21 @@ class ProductController {
             res.end();
         }
     }
+    homeBfsign = (req, res) => {
+        let cookies = cookie.parse(req.headers.cookie || '');
+        if (cookies.user){
+            let user=JSON.parse(cookies.user);
+            fs.readFile("./view/homeBfSign.html", "utf-8", async (error, homeBfSignHtml) => {
+                let products = await productService.showAll();
+                homeBfSignHtml = this.getHtmlProduct(products, homeBfSignHtml);
+                res.write(homeBfSignHtml);
+                res.end();
+            })
+        } else {
+            res.writeHead(301, {'location': "/signin"});
+            res.end();
+        }
+    }
 
 
     descriptionProduct=(req,res,id)=>{
