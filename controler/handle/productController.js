@@ -5,13 +5,6 @@ class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
         products.map(values => {
-            productHtml += `<tr>    
-                <th scope="row">${values.categoryId}</th>
-                <td>${values.nameProduct}</td>
-                <td>${values.quantityProduct}</td>
-                <td>${values.descriptionProduct}</td>
-                <td>${values.categoryId}</td>
-                <td>${values.}</td>`
             productHtml += `<li>
             <div class="product-item">
                 <div class="product-top">
