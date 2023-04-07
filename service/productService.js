@@ -19,11 +19,12 @@ class ProductService {
     }
     findById=(id)=>{
         return new Promise((resolve, reject) => {
-            this.connect.query(`select nameProduct,priceProduct,quantityProduct,descriptionProduct, imageProduct from product_list where productId=${id}`, (error, data) => {
+            this.connect.query(`SELECT p.*, c.nameCategory
+                                    FROM product_list p JOIN category_list c ON p.categoryId = c.categoryId WHERE p.productId=${id}`, (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
-                    resolve(data);
+                    resolve(data[0]);
                 }
             })
         })
