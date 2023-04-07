@@ -60,7 +60,6 @@ class ProductController {
         }
     }
 
-
     descriptionProduct = (req, res, id) => {
         fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
             let products = await productService.findById(id);

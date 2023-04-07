@@ -36,6 +36,7 @@ class userController {
         }
 
     }
+
     signUp = (req, res) => {
         if (req.method === "GET") {
             fs.readFile("./view/sign/signUp.html", "utf-8", async (error, signUpHtml) => {
@@ -55,6 +56,7 @@ class userController {
             })
         }
     }
+
     productInAdmin = (products, indexHtml) => {
             let productHtml = '';
             products.map(values => {
@@ -96,6 +98,7 @@ class userController {
             res.end();
         }
     }
+
     addProduct = async (req, res) => {
         if (req.method === 'GET') {
             fs.readFile('./view/admin/addProduct.html', 'utf-8', async (err, addHtml) => {
@@ -122,6 +125,7 @@ class userController {
         }
 
     }
+
     editProductById = async (req, res, id) => {
         if(req.method === 'GET'){
             fs.readFile('./view/admin/editAdmin.html', 'utf-8', async (err, valueProduct) => {
