@@ -2,6 +2,7 @@ const fs = require('fs')
 const productService = require('../../service/productService');
 const cookie = require('cookie');
 
+
 class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
@@ -14,7 +15,11 @@ class ProductController {
                         <img src="${values.imageProduct}"
                              alt="">
                     </a>
-                    <a href="" class="shopping-cart">ADD SHOPPING CART</a>
+                    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+                    <form action="/signin" method="post" target="dummyframe" id="form-${values.productId}">
+                     <input type="number" value="${values.productId}" name="id" hidden>
+                        </form>
+                    <a href="#" class="shopping-cart" onclick="document.getElementById('form-${values.productId}').submit()">ADD SHOPPING CART</a>
                 </div>
                 <div class="product-info">
                     <a href="" class="product-cat">Bao cao su</a>
@@ -64,11 +69,16 @@ class ProductController {
     descriptionProduct = (req, res, id) => {
         fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
             let products = await productService.findById(id);
+<<<<<<< HEAD
             descriptionProductHtml=descriptionProductHtml.replace("{image}",products.imageProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionName}",products.nameProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionPrice}",products.priceProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionDescription}",products.descriptionProduct)
             descriptionProductHtml=descriptionProductHtml.replace("{descriptionQuantity}",products.quantityProduct)
+=======
+            descriptionProductHtml = this.getHtmlProduct(products, descriptionProductHtml);
+            console.log(descriptionProductHtml  )
+>>>>>>> da250c148e8e2ca280a20307ebb45271da309e31
             res.write(descriptionProductHtml);
             res.end();
         })
