@@ -9,7 +9,8 @@ const router = {
     'signup': userController.signUp,
     'addProduct': userController.addProduct,
     "":productController.homeBfsign,
-    "signout":productController.homeBfsign
+    "signout":productController.homeBfsign,
+    "delete": userController.deleteProductById,
 }
 
 module.exports = router;
