@@ -28,8 +28,14 @@ class userController {
                         httpOnly: true,
                         maxAge: 60 * 60 * 24 * 7 // 1 week
                     }));
-                    res.writeHead(301, {'location': "/home"});
-                    res.end();
+                    if (account[0].roleUser===1){
+                        res.writeHead(301, {'location': "/home"});
+                        res.end();
+                    }else {
+                        res.writeHead(301, {'location': "/homeAdmin"});
+                        res.end();
+                    }
+
                 }
 
             })
