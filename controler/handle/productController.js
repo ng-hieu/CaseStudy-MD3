@@ -6,12 +6,12 @@ class ProductController {
         let productHtml = '';
         products.map(values => {
             productHtml += `<tr>    
-                <th scope="row">${values.productId}</th>
-                <td>${products.nameProduct}</td>
+                <th scope="row">${values.categoryId}</th>
+                <td>${values.nameProduct}</td>
                 <td>${values.quantityProduct}</td>
                 <td>${values.descriptionProduct}</td>
                 <td>${values.categoryId}</td>
-                <td>${values.imageProduct}</td>`
+                <td>${values.}</td>`
         })
         indexHtml = indexHtml.replace(`{product}`, productHtml);
         return indexHtml;
