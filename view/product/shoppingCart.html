@@ -157,6 +157,15 @@
 
     }
 
+    .BuyButton {
+        margin-left: 94.2%;
+    }
+
+    .totalPrice {
+        margin-left: 95%;
+        font-weight: bold
+    }
+
     table {
         margin-top: 1.5%;
         margin-left: 6.25%;
@@ -185,11 +194,23 @@
         line-height: 1.15;
     }
 
+    button {
+        font-style: italic;
+        font-weight: 800;
+        font-stretch: 100%;
+        font-family: 'Open Sans', sans-serif;
+        border: none;
+    }
+
 </style>
 
 <body>
 <div class="MainBoundary">
     <div class="ShoppingCartIntro">Shopping Cart</div>
+    <div class="BuyButton">
+        <form action="" method="post" style="text-align: center"><button type="submit">Purchase</button>
+        </form>
+    </div>
     <table>
         <tr>
             <th>ID</th>
@@ -200,9 +221,10 @@
             <th>Change</th>
         </tr>
         <tbody>
-        {shoppingcart}
+        {shoppingCart}
         </tbody>
     </table>
+    <div class="totalPrice">{totalPrice}</div>
     <div class></div>
 </div>
 </body>
