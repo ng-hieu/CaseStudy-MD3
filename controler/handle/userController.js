@@ -62,10 +62,8 @@ class userController {
                     `<li>
             <div class="product-item">
                 <div class="product-top">
-                    <a href="/signin" class="product-thumb">
                         <img src="${values.imageProduct}"
                              alt="">
-                    </a>
                 </div>
                 <div class="product-info">
                     <a href="" class="product-cat">Bao cao su</a>
