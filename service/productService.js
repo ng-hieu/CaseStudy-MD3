@@ -1,4 +1,5 @@
 const connection = require('../entity/connection.js')
+const cookie = require("cookie");
 
 class ProductService {
     connect;
@@ -10,7 +11,8 @@ class ProductService {
 
     showAll = () => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`select p.nameProduct,
+            this.connect.query(`select p.productId,
+                                       p.nameProduct,
                                        p.priceProduct,
                                        p.quantityProduct,
                                        p.descriptionProduct,
@@ -28,13 +30,13 @@ class ProductService {
     }
     findById = (id) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`select nameProduct, priceProduct, quantityProduct, descriptionProduct
+            this.connect.query(`select nameProduct, priceProduct, quantityProduct, descriptionProduct,imageProduct
                                 from product_list
                                 where productId = ${id}`, (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
-                    resolve(data);
+                    resolve(data[0]);
                 }
             })
         })
@@ -52,7 +54,6 @@ class ProductService {
             })
         })
     }
-
 }
 
 module.exports = new ProductService();
