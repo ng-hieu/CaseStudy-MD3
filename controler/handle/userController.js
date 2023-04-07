@@ -78,7 +78,7 @@ class userController {
                     <div class="product-price">${values.priceProduct}</div>
                     <div>
                         <a type="button" href="/edit/${values.productId}">Sửa</a>
-                        <button type="submit">Xóa</button>
+                        <a type="button" href="/delete/${values.productId}">Xóa</a>
                     </div>
                 </div>
             </div>
@@ -164,6 +164,11 @@ class userController {
                 res.end();
             })
         }
+    }
+    deleteProductById = async (req, res, id) =>{
+        await userSevice.deleteProductByAdmin(id);
+        res.writeHead(301, {'location':'/homeAdmin'});
+        res.end();
     }
 }
 
