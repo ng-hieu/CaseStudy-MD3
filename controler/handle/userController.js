@@ -148,7 +148,16 @@ class userController {
             })
         }
         else {
-
+            let data = '';
+            req.on('data', chunk => {
+                data += chunk
+            })
+            req.on('end', async ()=>{
+                let productEdit = qs.parse(data);
+                await userSevice.editProductByAdmin(id,productEdit);
+                res.writeHead(301, {'location': '/homeAdmin'})
+                res.end();
+            })
         }
     }
 }
