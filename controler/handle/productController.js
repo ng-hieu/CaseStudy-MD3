@@ -1,6 +1,5 @@
 const fs = require('fs')
 const productService = require('../../service/productService');
-const userService = require('../../service/userSevice')
 const cookie = require('cookie');
 
 
@@ -42,11 +41,20 @@ class ProductController {
             <td>${values.priceProduct}</td>
             <td> <img src="${values.imageProduct}" alt=""></td>
             <td>${values.descriptionProduct}</td>
+            <td>${values.priceProduct}</td>
              <td>
-             <a href="/edit/${values.productId}" type="button" class="btn btn-outline-secondary">+</a>
+             <a href="/edit/${values.productId}" type="button" class="btn btn-outline-secondary">-</a>
                     ${values.quantity}
-             <a href="/delete/${values.productId}" type="button" class="btn btn-outline-danger">-</a>
+             <a href="/#/${values.productId}" type="button" class="btn btn-outline-danger">+</a>
              </td>
+             <td>
+             <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+                    <form action="/delItemToCart/${values.productId}" method="post" target="dummyframe" id="form-${values.productId}">
+                     <input type="number" value="${values.productId}" name="id" hidden>
+                        </form>
+                    <a href="/shoppingCart" type="button" class="btn btn-outline-danger" class="shopping-cart" onclick=" document.getElementById('form-${values.productId}').submit()">Xóa</a>
+            </td>
+             
         </tr>`
         })
 
@@ -60,15 +68,29 @@ class ProductController {
         await productService.addItemToCart(id, user)
         res.end();
     }
-    showShoppingCart = (req,res)=>{
+    showShoppingCart = (req, res) => {
         fs.readFile("./view/product/shoppingCart.html", "utf-8", async (error, indexHtml) => {
             let cookies = cookie.parse(req.headers.cookie);
             let user = JSON.parse(cookies.user).userId;
-            let products = await productService.showItemToCart(user) ;
+            let products = await productService.showItemToCart(user);
             indexHtml = this.getShoppingCart(products, indexHtml);
             res.write(indexHtml);
             res.end();
         })
+    }
+    delItemToCart = async (req, res,productId) => {
+        let cookies = cookie.parse(req.headers.cookie);
+        let user = JSON.parse(cookies.user).userId;
+        await productService.deItemToCart(user,productId);
+        res.writeHead(301,  {'location': "/shoppingCart"});
+        res.end();
+    }
+    delAllToCart = async (req,res)=>{
+        let cookies = cookie.parse(req.headers.cookie)
+        let user = JSON.parse(cookies.user).userId
+        await productService.delAllItemToCart(user)
+        res.writeHead(301,  {'location': "/"});
+        res.end();
     }
 
     home = (req, res) => {

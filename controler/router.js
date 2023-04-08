@@ -12,7 +12,9 @@ const router = {
     "": productController.homeBfsign,
     "signout": productController.homeBfsign,
     "shoppingCart": productController.showShoppingCart,
-    'addToCart':productController.addShoppingCart
+    'addToCart': productController.addShoppingCart,
+    'delItemToCart': productController.delItemToCart,
+    'delAllToCart': productController.delAllToCart
 
 }
 

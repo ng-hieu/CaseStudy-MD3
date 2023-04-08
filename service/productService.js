@@ -71,6 +71,28 @@ class ProductService {
             })
         })
     }
+    deItemToCart = (userId, productId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`DELETE FROM cart_detail WHERE userId = ${userId} AND productId = ${productId}`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+    delAllItemToCart = (userId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`DELETE FROM cart_detail WHERE userId = ${userId}`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
 
     // Search SQL Database for similar product name and category
     findByName = (searchValue) => {
