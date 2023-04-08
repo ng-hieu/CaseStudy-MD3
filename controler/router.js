@@ -14,7 +14,12 @@ const router = {
     "sort": userController.sort,
     "showInfor": productController.showInforUser,
     "shoppingCart": productController.showShoppingCart,
-    'addToCart':productController.addShoppingCart
+    'addToCart': productController.addShoppingCart,
+    'delItemToCart': productController.delItemToCart,
+    "delAllToCart": productController.delAllToCart,
+    'increaseQuantityToCart':productController.increaseQuantityToCart,
+    'reduceQuantityToCart':productController.reduceQuantityToCart,
+
 }
 
 module.exports = router;
