@@ -44,23 +44,26 @@ class ProductService {
             })
         })
     }
-    addItemToCart = (productId,userId ) => {
+    addItemToCart = (productId, userId) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(` INSERT INTO cart_detail (userId,productId,quantity)
-                                         VALUES (${userId}, ${productId},'1');
-
-            `, (error, data) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(data);
+            this.connect.query(
+                `INSERT INTO cart_detail (userId, productId, quantity)
+                 VALUES (${userId}, ${productId}, '1')`,
+                (error,data) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                       resolve(data)
+                    }
                 }
-            })
-        })
-    }
+            );
+        });
+    };
     showItemToCart = (userId) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(` SELECT * FROM product_list p join cart_detail c on p.productId = c.productId
+            this.connect.query(` SELECT *
+                                 FROM product_list p
+                                          join cart_detail c on p.productId = c.productId
                                  where c.userId = ${userId};
             `, (error, data) => {
                 if (error) {
@@ -73,7 +76,10 @@ class ProductService {
     }
     deItemToCart = (userId, productId) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`DELETE FROM cart_detail WHERE userId = ${userId} AND productId = ${productId}`, (error, data) => {
+            this.connect.query(`DELETE
+                                FROM cart_detail
+                                WHERE userId = ${userId}
+                                  AND productId = ${productId}`, (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -84,11 +90,55 @@ class ProductService {
     }
     delAllItemToCart = (userId) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`DELETE FROM cart_detail WHERE userId = ${userId}`, (error, data) => {
+            this.connect.query(`DELETE
+                                FROM cart_detail
+                                WHERE userId = ${userId}`, (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
                     resolve(data);
+                }
+            })
+        })
+    }
+    increaseQuantityToCart = (userId, productId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`UPDATE cart_detail
+                                SET quantity = quantity + 1
+                                WHERE userId = ${userId}
+                                  AND productId = ${productId}`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+    reduceQuantityToCart = (userId, productId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`UPDATE cart_detail
+                                SET quantity = quantity - 1
+                                WHERE userId = ${userId}
+                                  AND productId = ${productId};
+            `, (error) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    return new Promise((resolve, reject) => {
+                        this.connect.query(`DELETE
+                                            FROM cart_detail
+                                            WHERE quantity = 1
+                                              and userId = ${userId}
+                                              AND productId = ${productId}`, (error, data) => {
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve(data);
+                            }
+                        })
+                    })
+
                 }
             })
         })

@@ -43,16 +43,28 @@ class ProductController {
             <td>${values.descriptionProduct}</td>
             <td>${values.priceProduct}</td>
              <td>
-             <a href="/edit/${values.productId}" type="button" class="btn btn-outline-secondary">-</a>
-                    ${values.quantity}
-             <a href="/#/${values.productId}" type="button" class="btn btn-outline-danger">+</a>
-             </td>
+            <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+                     <form action="/reduceQuantityToCart/${values.productId}" method="post" target="dummyframe" id="form--${values.productId}">
+                     <input type="number" value="${values.productId}" name="id" hidden>
+                     </form>
+                    <a href="/shoppingCart" type="button" class="btn btn-outline-danger" class="shopping-cart" onclick=" document.getElementById('form--${values.productId}').submit()">-</a>
+        
+                                  ${values.quantity}
+           
+               <iframe name="dummyframe+" id="dummyframe+" style="display: none;"></iframe>
+                     <form action="/increaseQuantityToCart/${values.productId}" method="post" target="dummyframe+" id="form+-${values.productId}">
+                     <input type="number" value="${values.productId}" name="id" hidden>
+                     </form>
+                    <a href="/shoppingCart" type="button" class="btn btn-outline-danger" class="shopping-cart" onclick=" document.getElementById('form+-${values.productId}').submit()">+</a>
+             </td>    
+             
              <td>
              <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
                     <form action="/delItemToCart/${values.productId}" method="post" target="dummyframe" id="form-${values.productId}">
                      <input type="number" value="${values.productId}" name="id" hidden>
                         </form>
                     <a href="/shoppingCart" type="button" class="btn btn-outline-danger" class="shopping-cart" onclick=" document.getElementById('form-${values.productId}').submit()">Xóa</a>
+            
             </td>
              
         </tr>`
@@ -89,7 +101,21 @@ class ProductController {
         let cookies = cookie.parse(req.headers.cookie)
         let user = JSON.parse(cookies.user).userId
         await productService.delAllItemToCart(user)
-        res.writeHead(301,  {'location': "/"});
+        res.writeHead(301,  {'location': "/shoppingCart"});
+        res.end();
+    }
+    increaseQuantityToCart = async (req, res, productId) => {
+        let cookies = cookie.parse(req.headers.cookie);
+        let user = JSON.parse(cookies.user).userId;
+        await productService.increaseQuantityToCart(user,productId);
+        res.writeHead(301,  {'location': "/shoppingCart"});
+        res.end();
+    }
+    reduceQuantityToCart = async (req, res, productId) => {
+        let cookies = cookie.parse(req.headers.cookie);
+        let user = JSON.parse(cookies.user).userId;
+        await productService.reduceQuantityToCart(user,productId);
+        res.writeHead(301,  {'location': "/shoppingCart"});
         res.end();
     }
 

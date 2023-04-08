@@ -14,7 +14,9 @@ const router = {
     "shoppingCart": productController.showShoppingCart,
     'addToCart': productController.addShoppingCart,
     'delItemToCart': productController.delItemToCart,
-    'delAllToCart': productController.delAllToCart
+    "delAllToCart": productController.delAllToCart,
+    'increaseQuantityToCart':productController.increaseQuantityToCart,
+    'reduceQuantityToCart':productController.reduceQuantityToCart,
 
 }
 
