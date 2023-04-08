@@ -33,7 +33,8 @@ class ProductService {
     // Search SQL Database for product with the same ID
     findById = (id) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`select nameProduct, priceProduct, quantityProduct, descriptionProduct, imageProduct
+            this.connect.query(`select *
+
                                 from product_list
                                 where productId = ${id}`, (error, data) => {
                 if (error) {
@@ -43,7 +44,33 @@ class ProductService {
                 }
             })
         })
+    }
+    addItemToCart = (productId,userId ) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(` INSERT INTO cart_detail (userId,productId,quantity)
+                                         VALUES (${userId}, ${productId},'1');
 
+            `, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+    showItemToCart = (userId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(` SELECT * FROM product_list p join cart_detail c on p.productId = c.productId
+                                 where c.userId = ${userId};
+            `, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
     }
 
     // Search SQL Database for similar product name and category
