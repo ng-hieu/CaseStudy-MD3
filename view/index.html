@@ -15,40 +15,6 @@
 </head>
 
 <style>
-    body {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 14px;
-        color: #111;
-        line-height: 1.15;
-        margin-top: 75px
-    }
-
-    .input-group {
-        float: none;
-        position: absolute;
-        top: 0%;
-        left: -5%;
-    }
-
-    .form-control {
-        height: 38px;
-    }
-
-    .form-outline {
-        float: none;
-        position: absolute;
-        top: 25%;
-        left: 65%;
-    }
-
-    .btn-primary {
-        float: none;
-        position: absolute;
-        left: 80%;
-        transform: translate(0%, 25%);
-    }
-</style>
-<style>
     /* The navigation bar */
     .navbar {
         overflow: hidden;
@@ -85,7 +51,8 @@
         background: white;
         color: #0061ff;
     }
-    .navbar-right:hover{
+
+    .navbar-right:hover {
         color: #0061ff;
     }
 
@@ -106,12 +73,14 @@
         display: block;
         padding-bottom: 21px;
     }
+
     .main {
         padding: 16px;
         margin-top: 30px;
         height: 1500px; /* Used in this example to enable scrolling */
     }
-    .navbar-left{
+
+    .navbar-left {
         display: inline-block;
         margin-left: 15px;
         margin-right: auto;
@@ -131,7 +100,7 @@
         font-size: 14px;
         color: #111;
         line-height: 1.15;
-
+        margin-top: 75px;
     }
 
     #wrapper {
@@ -242,12 +211,10 @@
 </style>
 <body>
 <div class="navbar" style="padding-bottom: 0px;padding-top: 0px;">
-    <a href="/home" class="navbar-brand">Home</a>
+    <a href="/home" class="navbar-brand" style="padding-bottom: 15px">Home</a>
     <div class="navbar-left">
         <a class="nav-link" href="/showInfor"><i class="fas fa-user" style="color: white"></i></a>
-        <a class="nav-link" href="#">Link 2</a>
-        <a class="nav-link" href="#">Link 3</a>
-        <a class="nav-link" href="#">Link 4</a>
+        <a class="nav-link" href="/shoppingCart"><i class="fas fa-cart-arrow-down" style="color: white"></i></a>
     </div>
     <div class="navbar-right">
         <a class="nav-link" href="/signout">SIGN OUT</a>
@@ -257,13 +224,14 @@
     <div class="headline" style="margin-top: 0px;">
         <h1>shop ba con sói hướng nội</h1>
     </div>
-    <div class="selects">
-        <select>
+    <form method="post">
+        <select name="selects">
             <option>-Sắp xếp-</option>
-            <option>Giá tăng dần</option>
-            <option>Giá giảm dần</option>
+            <option name="up" value="up"><a href="/sort">Giá tăng dần</a></option>
+            <option name="down" value="down">Giá giảm dần</option>
         </select>
-    </div>
+        <a href="/sort" type="submit">Sắp xếp</a>
+    </form>
     <ul class="products">
         {product}
     </ul>
