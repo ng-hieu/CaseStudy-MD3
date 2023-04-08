@@ -112,6 +112,37 @@ class ProductController {
             res.end();
         })
     }
+    getInforUser = (userInfor, indexHtml)=>{
+        let userHtml = '';
+        userInfor.map(user => {
+            userHtml += `
+            <th>${user.userId}</th>
+                <th>${user.nameUser}</th>
+                <th>${user.ageUser}</th>
+                <th>${user.email}</th>
+                <th>${user.phoneUser}</th>
+                <th>${user.addressUser}</th>
+                <th>${user.orders}</th>`
+        });
+        indexHtml = indexHtml.replace('{information}', userHtml);
+        return indexHtml;
+    }
+    showInforUser = async (req, res) => {
+        let cookies = cookie.parse(req.headers.cookie);
+        let user = JSON.parse(cookies.user).userId;
+
+        console.log("Checkkkkkkk   "+user)
+        fs.readFile('./view/inforCustomer.html', "utf-8", async (err, indexHtml)=>{
+            if(err){
+                console.log(err);
+            } else {
+                let userInfor = await productService.showInforCustomer(user);
+                indexHtml = this.getInforUser(userInfor, indexHtml);
+                res.write(indexHtml);
+                res.end();
+            }
+        })
+}
 }
 
 module.exports = new ProductController()

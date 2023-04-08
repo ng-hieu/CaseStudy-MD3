@@ -11,6 +11,8 @@ const router = {
     "":productController.homeBfsign,
     "signout":productController.homeBfsign,
     "delete": userController.deleteProductById,
+    "sort": userController.sort,
+    "showInfor": productController.showInforUser,
     "shoppingCart": productController.showShoppingCart,
     'addToCart':productController.addShoppingCart
 }

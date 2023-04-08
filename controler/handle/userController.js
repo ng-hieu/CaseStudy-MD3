@@ -28,10 +28,10 @@ class userController {
                         httpOnly: true,
                         maxAge: 60 * 60 * 24 * 7 // 1 week
                     }));
-                    if (account[0].roleUser===1){
+                    if (account[0].roleUser === 1) {
                         res.writeHead(301, {'location': "/home"});
                         res.end();
-                    }else {
+                    } else {
                         res.writeHead(301, {'location': "/homeAdmin"});
                         res.end();
                     }
@@ -64,10 +64,10 @@ class userController {
     }
 
     productInAdmin = (products, indexHtml) => {
-            let productHtml = '';
-            products.map(values => {
-                productHtml +=
-                    `<li>
+        let productHtml = '';
+        products.map(values => {
+            productHtml +=
+                `<li>
             <div class="product-item">
                 <div class="product-top">
                         <img src="${values.imageProduct}"
@@ -84,15 +84,15 @@ class userController {
                 </div>
             </div>
         </li>`
-            })
-            indexHtml = indexHtml.replace(`{product}`, productHtml);
-            return indexHtml;
-        };
+        })
+        indexHtml = indexHtml.replace(`{product}`, productHtml);
+        return indexHtml;
+    };
 
     showProductInAdmin = (req, res) => {
         let cookies = cookie.parse(req.headers.cookie || '');
-        if (cookies.user){
-            let user=JSON.parse(cookies.user);
+        if (cookies.user) {
+            let user = JSON.parse(cookies.user);
             fs.readFile("./view/admin/homeOfAdmin.html", "utf-8", async (error, indexHtml) => {
                 let products = await productService.showAll();
                 indexHtml = this.productInAdmin(products, indexHtml);
@@ -133,9 +133,9 @@ class userController {
     }
 
     editProductById = async (req, res, id) => {
-        if(req.method === 'GET'){
+        if (req.method === 'GET') {
             fs.readFile('./view/admin/editAdmin.html', 'utf-8', async (err, valueProduct) => {
-                if(err){
+                if (err) {
                     console.log(err);
                 } else {
                     let productNeed = await productService.findById(id);
@@ -154,24 +154,47 @@ class userController {
                     res.end();
                 }
             })
-        }
-        else {
+        } else {
             let data = '';
             req.on('data', chunk => {
                 data += chunk
             })
-            req.on('end', async ()=>{
+            req.on('end', async () => {
                 let productEdit = qs.parse(data);
-                await userSevice.editProductByAdmin(id,productEdit);
+                await userSevice.editProductByAdmin(id, productEdit);
                 res.writeHead(301, {'location': '/homeAdmin'})
                 res.end();
             })
         }
     }
-    deleteProductById = async (req, res, id) =>{
+    deleteProductById = async (req, res, id) => {
         await userSevice.deleteProductByAdmin(id);
-        res.writeHead(301, {'location':'/homeAdmin'});
+        res.writeHead(301, {'location': '/homeAdmin'});
         res.end();
+    }
+    sort = async (req, res) => {
+        // let data = ''
+        // req.on('data', chunk => {
+        //     data += chunk;
+        // })
+        // req.on('end', async () => {
+            // let chossen = qs.parse(data);
+            // let arrChossen = JSON.parse(fs.readFileSync('sort.json', "utf-8"));
+            // arrChossen.push(chossen);
+            // fs.writeFileSync('sort.json', JSON.stringify(arrChossen));
+            // let option = arrChossen[arrChossen.length - 1];
+            // if (option == "Giá tăng dần") {
+            //     await productService.sortUpByPrice();
+            //     res.writeHead(301, {'location': '/home'});
+            //     res.end();
+            // }
+        fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
+             await productService.sortUpByPrice();
+            res.writeHead(301, {'location': '/home'});
+            res.write(indexHtml)
+              res.end();
+        })
+        //})
     }
 }
 

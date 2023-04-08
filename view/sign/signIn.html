@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integr    ity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
             integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
             crossorigin="anonymous"></script>
@@ -13,53 +14,49 @@
             crossorigin="anonymous"></script>
 </head>
 
-
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
-
-    body {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 14px;
-        color: #111;
-        line-height: 1.15;
-        margin-top: 75px
-    }
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Reseting CSS
- */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-     * Styling navigation bar for large screen devices
-     */
-
+    /* The navigation bar */
     .navbar {
+        overflow: hidden;
+        background-color: black;
         position: fixed;
-        z-index: 99999;
+        z-index: 9999;
         top: 0;
-        left: 0;
         width: 100%;
-        background: Black;
-        padding-top: 0;
-        padding-bottom: 0;
-        font-size: 15px
     }
+
+    /* Links inside the navbar */
+    .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
     .navbar-brand {
-        width: 100px;
-
+        color: White;
+        text-decoration: none;
         display: inline-block;
+        padding: 15px;
+        font-weight: bold;
+        padding-left: 30px;
+        padding-right: 30px;
+        background: RoyalBlue;
     }
 
-    .navbar-left {
-        display: inline-block;
-        margin-left: 15px;
+    /* Change background on mouse-over */
+    .navbar-brand:hover {
+        background: white;
+        color: #0061ff;
+    }
+    .navbar-right:hover{
+        color: #0061ff;
     }
 
     .navbar-right {
+        position: static;
         display: inline-block;
         margin-right: 15px;
         position: absolute;
@@ -67,88 +64,156 @@
         right: 0;
     }
 
-    .navbar-brand,
-    .navbar .nav-link {
+    a.nav-link {
         color: White;
         text-decoration: none;
         display: inline-block;
         padding: 15px;
+        display: block;
+        padding-bottom: 21px;
     }
-
-    .navbar-brand {
-        font-weight: bold;
-        padding-left: 30px;
-        padding-right: 30px;
-        background: RoyalBlue;
+    .main {
+        padding: 16px;
+        margin-top: 30px;
+        height: 1500px; /* Used in this example to enable scrolling */
     }
-
-    .navbar .nav-link:hover {
-        color: LightGray;
-    }
-
-    .navbar-collapse,
-    .navbar-toggler {
-        display: none;
-    }
-
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-     * Override styles to support mobile devices
-     */
-
-    @media (max-width: 842px) {
-        .navbar-right,
-        .navbar-left {
-            display: block;
-            border-top: 1px solid DimGray;
-        }
-
-        .navbar-right {
-            position: static;
-        }
-
-        .navbar .nav-link {
-            display: block;
-        }
-
-        .navbar-collapse:checked + .navbar {
-            max-height: 50px;
-            overflow: hidden;
-        }
-
-        .navbar-toggler {
-            color: White;
-            display: inline-block;
-            padding: 15px 25px;
-            position: absolute;
-            top: 0;
-            right: 0;
-            border-left: 1px solid DimGray;
-            cursor: pointer;
-        }
+    .navbar-left{
+        display: inline-block;
+        margin-left: 15px;
+        margin-right: auto;
     }
 </style>
-<nav class="navbar">
-    <div class="contronller">
-        <a class="navbar-brand" href="/home">
-            HOME
-        </a>
+<style>
+    /*Li va Ul*/
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
+    * {
+        padding: 0;
+        margin: 0;
+    }
 
-        <div class="navbar-left">
-            <a class="nav-link" href="/addProduct">add Product</a>
-            <a class="nav-link" href="#">Link 2</a>
-            <a class="nav-link" href="#">Link 3</a>
-            <a class="nav-link" href="#">Link 4</a>
-            <a class="nav-link" href="#">Link 5</a>
-        </div>
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+        margin-top: 75px;
 
-        <div class="navbar-right">
+    }
 
-            <a class="nav-link" href="/signin">SIGN IN</a>
-            <a class="nav-link" href="/signup">SIGN UP</a>
-        </div>
+    #wrapper {
+        max-width: 1170px;
+        margin: 0 auto;
+    }
+
+    .headline {
+        text-align: center;
+        margin-top: 75px;
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 18px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        border: 1px solid #bebebe;
+        display: inline-block;
+        color: #555;
+        font-weight: 600;
+    }
+
+    ul.products {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    ul.products li {
+        flex-basis: 25%;
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+        margin-bottom: 30px;
+    }
+
+    ul.products li img {
+
+        max-width: 100%;
+        height: 250px;
+    }
+
+    ul.products li .product-top {
+        position: relative;
+        overflow: hidden;
+    }
+
+    ul.products li .product-top .product-thumb {
+        display: block;
+    }
+
+    ul.products li:hover .product-top .product-thumb img {
+        filter: opacity(80%);
+    }
+
+    ul.products li .product-top .product-thumb img {
+        display: block;
+
+    }
+
+    ul.products li .product-top a.shopping-cart {
+        text-transform: uppercase;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+        background-color: darkgray;
+        padding: 10px 0;
+        position: absolute;
+        bottom: -36px;
+        width: 100%;
+        transition: 0.25s ease-in-out;
+        opacity: 0.75;
+    }
+
+    ul.products li:hover a.shopping-cart {
+        bottom: 0;
+    }
+
+    ul.products li .product-info {
+        padding: 20px 0;
+    }
+
+    ul.products li .product-info a {
+        display: block;
+        text-decoration: none;
+    }
+
+    ul.products li .product-info a.product-cart {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: green;
+        padding: 3px 0;
+    }
+
+    ul.products li .product-info a.product-name {
+        color: greenyellow;
+        padding: 3px 0;
+    }
+
+    ul.products li .product-info .product-price {
+        color: aqua;
+        padding: 2px 0;
+        font-weight: 600;
+    }
+
+</style>
+<body>
+<div class="navbar" style="padding-bottom: 0px;padding-top: 0px;">
+    <a href="/signout" class="navbar-brand" style="padding-bottom: 15px">Home</a>
+    <div class="navbar-right">
+        <a class="nav-link" href="/signin">SIGN IN</a>
+        <a class="nav-link" href="/signup">SIGN UP</a>
     </div>
-</nav>
-<body  >
+</div>
 <center>
     <div class="" style=" position: relative">
         <center><h3 style="color: blue"> Login</h3></center>

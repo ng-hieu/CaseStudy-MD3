@@ -90,6 +90,14 @@
     /*Li va Ul*/
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
 
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+        margin-top: 75px
+    }
+
     * {
         padding: 0;
         margin: 0;
@@ -100,7 +108,7 @@
         font-size: 14px;
         color: #111;
         line-height: 1.15;
-        margin-top: 75px;
+
     }
 
     #wrapper {
@@ -208,10 +216,30 @@
         font-weight: 600;
     }
 
+    table {
+        margin-top: 1.5%;
+        margin-left: 6.25%;
+        width: 100%;
+        border-collapse: collapse;
+
+    }
+
+    th {
+        font-style: italic;
+        text-align: center;
+        border: 1px solid #bebebe;
+        padding: 15px
+    }
+
+    td {
+        text-align: center;
+        border: 1px solid #bebebe;
+        padding: 15px
+    }
 </style>
 <body>
 <div class="navbar" style="padding-bottom: 0px;padding-top: 0px;">
-    <a href="/home" class="navbar-brand" style="padding-bottom: 15px">Home</a>
+    <a href="/home" class="navbar-brand">Home</a>
     <div class="navbar-left">
         <a class="nav-link" href="/showInfor"><i class="fas fa-user" style="color: white"></i></a>
         <a class="nav-link" href="/shoppingCart"><i class="fas fa-cart-arrow-down" style="color: white"></i></a>
@@ -222,19 +250,24 @@
 </div>
 <div id="wrapper" class="main">
     <div class="headline" style="margin-top: 0px;">
-        <h1>shop ba con sói hướng nội</h1>
+        <h1>Khách hàng thân quen của shop ba con sói hướng nội</h1>
     </div>
-    <form method="post">
-        <select name="selects">
-            <option>-Sắp xếp-</option>
-            <option name="up" value="up"><a href="/sort">Giá tăng dần</a></option>
-            <option name="down" value="down">Giá giảm dần</option>
-        </select>
-        <a href="/sort" type="submit">Sắp xếp</a>
-    </form>
-    <ul class="products">
-        {product}
-    </ul>
+    <div>
+        <table>
+            <tr>
+                <th>Id khách hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Tuổi</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Số đơn</th>
+            </tr>
+            <tbody>
+            {information}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
