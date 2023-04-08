@@ -65,6 +65,17 @@ class UserService {
             })
         })
     }
+    deleteProductByAdmin = (id) => {
+        return new Promise((resolve, reject)=>{
+            this.connect.query(`DELETE FROM product_list WHERE (productId = ${id});`, (err, product)=>{
+                if(err){
+                    reject(err)
+                } else {
+                    resolve(product);
+                }
+            })
+        })
+    }
 
 }
 

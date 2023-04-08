@@ -19,6 +19,7 @@ class userController {
             })
             req.on('end', async () => {
                 let user = qs.parse(data);
+                console.log(user);
                 let account = await userSevice.getUser(user);
                 if (account.length === 0) {
                     res.writeHead(301, {'location': "/"});
@@ -42,6 +43,7 @@ class userController {
         }
 
     }
+
     signUp = (req, res) => {
         if (req.method === "GET") {
             fs.readFile("./view/sign/signUp.html", "utf-8", async (error, signUpHtml) => {
@@ -61,6 +63,7 @@ class userController {
             })
         }
     }
+
     productInAdmin = (products, indexHtml) => {
             let productHtml = '';
             products.map(values => {
@@ -77,7 +80,7 @@ class userController {
                     <div class="product-price">${values.priceProduct}</div>
                     <div>
                         <a type="button" href="/edit/${values.productId}">Sửa</a>
-                        <button type="submit">Xóa</button>
+                        <a type="button" href="/delete/${values.productId}">Xóa</a>
                     </div>
                 </div>
             </div>
@@ -102,6 +105,7 @@ class userController {
             res.end();
         }
     }
+
     addProduct = async (req, res) => {
         if (req.method === 'GET') {
             fs.readFile('./view/admin/addProduct.html', 'utf-8', async (err, addHtml) => {
@@ -128,6 +132,7 @@ class userController {
         }
 
     }
+
     editProductById = async (req, res, id) => {
         if(req.method === 'GET'){
             fs.readFile('./view/admin/editAdmin.html', 'utf-8', async (err, valueProduct) => {
@@ -163,6 +168,11 @@ class userController {
                 res.end();
             })
         }
+    }
+    deleteProductById = async (req, res, id) =>{
+        await userSevice.deleteProductByAdmin(id);
+        res.writeHead(301, {'location':'/homeAdmin'});
+        res.end();
     }
 }
 

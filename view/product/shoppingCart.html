@@ -13,6 +13,16 @@
             crossorigin="anonymous"></script>
 </head>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+        margin-top: 75px
+    }
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Reseting CSS
  */
@@ -35,11 +45,25 @@
         background: Black;
         padding-top: 0;
         padding-bottom: 0;
+        font-size: 15px;
+    }
+
+    .navbar-brand {
+        width: 100px;
+
+        display: inline-block;
     }
 
     .navbar-left {
         display: inline-block;
         margin-left: 15px;
+    }
+
+    .navbar-middle {
+        display: inline-block;
+        margin-left: 15px;
+        top: 50%;
+        left: 50%
     }
 
     .navbar-right {
@@ -52,9 +76,6 @@
 
     .navbar-brand,
     .navbar .nav-link {
-        font-style: italic;
-        font-weight: 800;
-        font-stretch: 100%;
         color: White;
         text-decoration: none;
         display: inline-block;
@@ -113,31 +134,62 @@
         }
     }
 </style>
-
-
 <nav class="navbar">
-    <div class="contronller">
+    <div class="controller">
         <a class="navbar-brand" href="/home">
             HOME
         </a>
 
         <div class="navbar-left">
-            <a class="nav-link" href="#">Link 1</a>
+            <a class="nav-link" href="/addProduct">add Product</a>
             <a class="nav-link" href="#">Link 2</a>
             <a class="nav-link" href="#">Link 3</a>
             <a class="nav-link" href="#">Link 4</a>
-            <a class="nav-link" href="#">Link 5</a>
+            <a class="nav-search-box" href="/searchProduct">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search" id="form1" class="form-control"/>
+                        <label class="form-label" for="form1"></label>
+                    </div>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-search">Search</i>
+                    </button>
+                </div>
+            </a>
+
         </div>
 
         <div class="navbar-right">
-
-            <a class="nav-link" href="/signin">SIGN IN</a>
-            <a class="nav-link" href="/signup">SIGN UP</a>
+            <a class="nav-link" href="/signout">SIGN OUT</a>
         </div>
     </div>
 </nav>
 
 <style>
+    .input-group {
+        float: none;
+        position: absolute;
+        top: 0%;
+        left: -5%;
+    }
+
+    .form-control {
+        height:38px;
+    }
+
+    .form-outline {
+        float: none;
+        position: absolute;
+        top: 25%;
+        left: 65%;
+    }
+
+    .btn-primary {
+        float: none;
+        position: absolute;
+        left: 80%;
+        transform: translate(0%, 25%);
+    }
 
     .MainBoundary {
         margin-top: 5.5%;
@@ -155,6 +207,15 @@
         font-family: 'Open Sans', sans-serif;
         font-size: 200%;
 
+    }
+
+    .BuyButton {
+        margin-left: 94.5%;
+    }
+
+    .totalPrice {
+        margin-left: 95%;
+        font-weight: bold
     }
 
     table {
@@ -185,11 +246,23 @@
         line-height: 1.15;
     }
 
-</style>
+    button {
+        font-style: italic;
+        font-weight: 800;
+        font-stretch: 100%;
+        font-family: 'Open Sans', sans-serif;
+        border: none;
+    }
 
+</style>
 <body>
 <div class="MainBoundary">
     <div class="ShoppingCartIntro">Shopping Cart</div>
+    <div class="BuyButton">
+        <form action="" method="post" style="text-align: center">
+            <button type="submit">Purchase</button>
+        </form>
+    </div>
     <table>
         <tr>
             <th>ID</th>
@@ -200,9 +273,10 @@
             <th>Change</th>
         </tr>
         <tbody>
-        {shoppingcart}
+        {shoppingCart}
         </tbody>
     </table>
+    <div class="totalPrice">{totalPrice}</div>
     <div class></div>
 </div>
 </body>
