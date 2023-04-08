@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
@@ -22,6 +22,7 @@
         line-height: 1.15;
         margin-top: 75px
     }
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Reseting CSS
  */
@@ -44,8 +45,9 @@
         background: Black;
         padding-top: 0;
         padding-bottom: 0;
-        font-size: 15px
+        font-size: 15px;
     }
+
     .navbar-brand {
         width: 100px;
 
@@ -55,6 +57,13 @@
     .navbar-left {
         display: inline-block;
         margin-left: 15px;
+    }
+
+    .navbar-middle {
+        display: inline-block;
+        margin-left: 15px;
+        top: 50%;
+        left: 50%
     }
 
     .navbar-right {
@@ -126,33 +135,79 @@
     }
 </style>
 <nav class="navbar">
-    <div class="contronller">
-        <a class="navbar-brand" href="/home">
+    <div class="controller">
+        <a class="navbar-brand" href="/signout">
             HOME
         </a>
 
         <div class="navbar-left">
-            <a class="nav-link" href="/link1">link1</a>
-            <a class="nav-link" href="/link2">Link 2</a>
-            <a class="nav-link" href="/link3">Link 3</a>
-            <a class="nav-link" href="/link4">Link 4</a>
-            <a class="nav-link" href="/link5">Link 5</a>
-        </div>
+            <a class="nav-link" href="/addProduct">add Product</a>
+            <a class="nav-link" href="#">Link 2</a>
+            <a class="nav-link" href="#">Link 3</a>
+            <a class="nav-link" href="#">Link 4</a>
+            <a class="nav-search-box" href="/searchProduct">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search" id="form1" class="form-control"/>
+                        <label class="form-label" for="form1"></label>
+                    </div>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-search">Search</i>
+                    </button>
+                </div>
+            </a>
 
-        <div class="navbar-right">
-            <a class="nav-link" href="/signin">SIGN IN</a>
-            <a class="nav-link" href="/signup">SIGN UP</a>
         </div>
+            <div class="navbar-right">
+                <a class="nav-link" href="/signin">SIGN IN</a>
+                <a class="nav-link" href="/signup">SIGN UP</a>
+            </div>
     </div>
 </nav>
 
-<body >
 <style>
+    .input-group {
+        float: none;
+        position: absolute;
+        top: 0%;
+        left: -5%;
+    }
+
+    .form-control {
+        height: 38px;
+    }
+
+    .form-outline {
+        float: none;
+        position: absolute;
+        top: 25%;
+        left: 65%;
+    }
+
+    .btn-primary {
+        float: none;
+        position: absolute;
+        left: 80%;
+        transform: translate(0%, 25%);
+    }
+
+</style>
+<body>
+<style>
+    /*Li va Ul*/
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
 
     * {
         padding: 0;
         margin: 0;
+    }
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+
     }
 
     #wrapper {
@@ -162,7 +217,8 @@
 
     .headline {
         text-align: center;
-        margin: 40px 0;
+        margin-top: 75px;
+        margin-bottom: 10px;
     }
 
     h1 {
@@ -191,8 +247,9 @@
     }
 
     ul.products li img {
+
         max-width: 100%;
-        height: auto;
+        height: 250px;
     }
 
     ul.products li .product-top {
@@ -240,7 +297,7 @@
         text-decoration: none;
     }
 
-    ul.products li .product-info a.product-cat {
+    ul.products li .product-info a.product-cart {
         font-size: 11px;
         text-transform: uppercase;
         color: green;
@@ -257,30 +314,16 @@
         padding: 2px 0;
         font-weight: 600;
     }
+
 </style>
+
 <div id="wrapper">
     <div class="headline">
         <h1>shop ba con sói hướng nội</h1>
     </div>
     <ul class="products">
-        <li>
-            <div class="product-item">
-                <div class="product-top">
-                    <a href="/signin" class="product-thumb">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat.jpg "
-                             alt="">
-                    </a>
-                    <a href="" class="shopping-cart">ADD SHOPPING CART</a>
-                </div>
-                <div class="product-info">
-                    <a href="" class="product-cat"> bags</a>
-                    <a href="" class="product-name">name bag</a>
-                    <div class="product-price">500.000VND</div>
-                </div>
-            </div>
-        </li>
+        {product}
     </ul>
-
 </div>
 
 

@@ -46,15 +46,20 @@ class ProductService {
 
     }
 
-    // Search SQL Database for similar product name and category
-    findByName = (searchValue) => {
+    // Searched product SQL Database by price in descending order
+    searchProducts = (searchValue) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory
-                                FROM product_List
-                                         INNER JOIN category_list
-                                                    ON product_list.categoryId = category_list.categoryId
+            this.connect.query(`SELECT p.productId,
+                                       p.nameProduct,
+                                       p.priceProduct,
+                                       p.quantityProduct,
+                                       p.descriptionProduct,
+                                       c.nameCategory,
+                                       p.imageProduct
+                                FROM product_list p
+                                         JOIN category_list c ON p.categoryId = c.categoryId
                                 WHERE nameProduct LIKE '%${searchValue}%'
-                                   OR nameCategory LIKE '%${searchValue}%'`, (error, data) => {
+                                   OR nameCategory LIKE '%${searchValue}%';`, (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -63,30 +68,26 @@ class ProductService {
             })
         })
     }
-
-    // Sort searched product SQL Database by price in ascending order
-    sortByASCPrice = (searchValue) => {
+    sortUpByPrice = () =>{
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory, product_list.priceProduct
-                                FROM product_List
-                                         INNER JOIN category_list
-                                                    ON product_list.categoryId = category_list.categoryId
-                                WHERE nameProduct LIKE '%${searchValue}%'
-                                   OR nameCategory LIKE '%${searchValue}%'
-                                ORDER BY priceProduct ASC;`)
+            this.connect.query(`SELECT * FROM product_list ORDER BY priceProduct;`, (err, data)=>{
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
         })
     }
-
-    // Sort searched product SQL Database by price in descending order
-    sortByDESCPrice = (searchValue) => {
+    sortDownByPrice = () =>{
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory, product_list.priceProduct
-                                FROM product_List
-                                         INNER JOIN category_list
-                                                    ON product_list.categoryId = category_list.categoryId
-                                WHERE nameProduct LIKE '%${searchValue}%'
-                                   OR nameCategory LIKE '%${searchValue}%'
-                                ORDER BY priceProduct DESC;`)
+            this.connect.query(`SELECT * FROM product_list ORDER BY priceProduct DESC;`, (err, data)=>{
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
         })
     }
 }

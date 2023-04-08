@@ -134,17 +134,19 @@
         }
     }
 </style>
-<nav class="navbar">
+<div class="navbar">
     <div class="controller">
         <a class="navbar-brand" href="/home">
             HOME
         </a>
-
         <div class="navbar-left">
-            <a class="nav-link" href="/addProduct">add Product</a>
-            <a class="nav-link" href="#">Link 2</a>
-            <a class="nav-link" href="#">Link 3</a>
-            <a class="nav-link" href="#">Link 4</a>
+            <select name = 'sortProduct'>
+                <option>-Sắp xếp-</option>
+                <option name="up" value="up">Giá tăng dần</option>
+                <option name="down" value="down">Giá giảm dần</option>
+            </select>
+        </div>
+        <div>
             <a class="nav-search-box" href="/searchProduct">
                 <div class="input-group">
                     <div class="form-outline">
@@ -156,14 +158,13 @@
                     </button>
                 </div>
             </a>
-
         </div>
 
         <div class="navbar-right">
             <a class="nav-link" href="/signout">SIGN OUT</a>
         </div>
     </div>
-</nav>
+</div>
 
 <style>
     .input-group {
