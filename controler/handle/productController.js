@@ -8,7 +8,6 @@ class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
         products.map(values => {
-
             productHtml += `<li>
             <div class="product-item">
                 <div class="product-top">
@@ -43,12 +42,15 @@ class ProductController {
             <td>${values.priceProduct}</td>
             <td> <img src="${values.imageProduct}" alt=""></td>
             <td>${values.descriptionProduct}</td>
-             <td><a href="/edit/${values.productId}" type="button" class="btn btn-outline-secondary">+</a>${values.quantity}<a href="/delete/${values.productId}" type="button" class="btn btn-outline-danger">-</a></td>
-             
+             <td>
+             <a href="/edit/${values.productId}" type="button" class="btn btn-outline-secondary">+</a>
+                    ${values.quantity}
+             <a href="/delete/${values.productId}" type="button" class="btn btn-outline-danger">-</a>
+             </td>
         </tr>`
         })
 
-        indexHtml = indexHtml.replace(`{shoppingcart}`, productHtml);
+        indexHtml = indexHtml.replace(`{shoppingCart}`, productHtml);
         return indexHtml;
     }
 
