@@ -90,6 +90,20 @@ class ProductService {
             })
         })
     }
+    showInforCustomer = (id) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`SELECT u.userId, u.nameUser, u.ageUser, u.email, u.phoneUser, u.addressUser, COUNT(od.orderId) AS orders
+                                FROM user_list u JOIN order_list o ON u.userId = o.userId
+                                                 JOIN order_detail od ON od.orderId = o.orderId WHERE u.userId = ${id};`, (err, data)=>{
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+
 }
 
 module.exports = new ProductService();

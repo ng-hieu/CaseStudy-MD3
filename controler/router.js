@@ -12,6 +12,7 @@ const router = {
     "signout":productController.homeBfsign,
     "delete": userController.deleteProductById,
     "sort": userController.sortUp,
+    "showInfor": productController.showInforUser,
 }
 
 module.exports = router;

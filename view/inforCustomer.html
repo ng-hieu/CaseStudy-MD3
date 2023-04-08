@@ -15,40 +15,6 @@
 </head>
 
 <style>
-    body {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 14px;
-        color: #111;
-        line-height: 1.15;
-        margin-top: 75px
-    }
-
-    .input-group {
-        float: none;
-        position: absolute;
-        top: 0%;
-        left: -5%;
-    }
-
-    .form-control {
-        height: 38px;
-    }
-
-    .form-outline {
-        float: none;
-        position: absolute;
-        top: 25%;
-        left: 65%;
-    }
-
-    .btn-primary {
-        float: none;
-        position: absolute;
-        left: 80%;
-        transform: translate(0%, 25%);
-    }
-</style>
-<style>
     /* The navigation bar */
     .navbar {
         overflow: hidden;
@@ -85,7 +51,8 @@
         background: white;
         color: #0061ff;
     }
-    .navbar-right:hover{
+
+    .navbar-right:hover {
         color: #0061ff;
     }
 
@@ -106,12 +73,14 @@
         display: block;
         padding-bottom: 21px;
     }
+
     .main {
         padding: 16px;
         margin-top: 30px;
         height: 1500px; /* Used in this example to enable scrolling */
     }
-    .navbar-left{
+
+    .navbar-left {
         display: inline-block;
         margin-left: 15px;
         margin-right: auto;
@@ -120,6 +89,14 @@
 <style>
     /*Li va Ul*/
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #111;
+        line-height: 1.15;
+        margin-top: 75px
+    }
 
     * {
         padding: 0;
@@ -239,6 +216,26 @@
         font-weight: 600;
     }
 
+    table {
+        margin-top: 1.5%;
+        margin-left: 6.25%;
+        width: 100%;
+        border-collapse: collapse;
+
+    }
+
+    th {
+        font-style: italic;
+        text-align: center;
+        border: 1px solid #bebebe;
+        padding: 15px
+    }
+
+    td {
+        text-align: center;
+        border: 1px solid #bebebe;
+        padding: 15px
+    }
 </style>
 <body>
 <div class="navbar" style="padding-bottom: 0px;padding-top: 0px;">
@@ -255,18 +252,24 @@
 </div>
 <div id="wrapper" class="main">
     <div class="headline" style="margin-top: 0px;">
-        <h1>shop ba con sói hướng nội</h1>
+        <h1>Khách hàng thân quen của shop ba con sói hướng nội</h1>
     </div>
-    <div class="selects">
-        <select>
-            <option>-Sắp xếp-</option>
-            <option>Giá tăng dần</option>
-            <option>Giá giảm dần</option>
-        </select>
+    <div>
+        <table>
+            <tr>
+                <th>Id khách hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Tuổi</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Số đơn</th>
+            </tr>
+            <tbody>
+            {information}
+            </tbody>
+        </table>
     </div>
-    <ul class="products">
-        {product}
-    </ul>
 </div>
 
 
