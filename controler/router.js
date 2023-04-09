@@ -1,5 +1,6 @@
 const productController = require('./handle/productController');
 const userController = require('./handle/userController');
+const adMincontroller = require('./handle/adminController');
 const router = {
     "home": productController.home,
     'edit': userController.editProductById,
@@ -12,8 +13,9 @@ const router = {
     "delete": userController.deleteProductById,
     "signout": productController.homeBfsign,
     "shoppingCart": productController.showShoppingCart,
-    'addToCart':productController.addShoppingCart
-
+    'addToCart':productController.addShoppingCart,
+    "editOrderDetail":adMincontroller.showOrderDetail,
+    "deleteOrderDetail":adMincontroller.deleteOrderDetail,
 }
 
 module.exports = router;

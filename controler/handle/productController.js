@@ -8,7 +8,6 @@ class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
         products.map(values => {
-
             productHtml += `<li>
             <div class="product-item">
                 <div class="product-top">
@@ -48,7 +47,7 @@ class ProductController {
         </tr>`
         })
 
-        indexHtml = indexHtml.replace(`{shoppingcart}`, productHtml);
+        indexHtml = indexHtml.replace(`{shoppingCart}`, productHtml);
         return indexHtml;
     }
 
@@ -117,18 +116,7 @@ class ProductController {
             })
         } else {
             res.writeHead(301, {'location': "/signin"});
-
-            fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
-                let products = await productService.findById(id);
-                descriptionProductHtml = descriptionProductHtml.replace("{image}", products.imageProduct)
-                descriptionProductHtml = descriptionProductHtml.replace("{descriptionName}", products.nameProduct)
-                descriptionProductHtml = descriptionProductHtml.replace("{descriptionPrice}", products.priceProduct)
-                descriptionProductHtml = descriptionProductHtml.replace("{descriptionDescription}", products.descriptionProduct)
-                descriptionProductHtml = descriptionProductHtml.replace("{descriptionQuantity}", products.quantityProduct)
-                res.write(descriptionProductHtml);
-                res.end();
-            })
-
+            res.end()
         }
     }
 }
