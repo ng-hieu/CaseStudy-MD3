@@ -147,17 +147,10 @@ class ProductService {
     // Searched product SQL Database by price in descending order
     searchProducts = (searchValue) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT p.productId,
-                                       p.nameProduct,
-                                       p.priceProduct,
-                                       p.quantityProduct,
-                                       p.descriptionProduct,
-                                       c.nameCategory,
-                                       p.imageProduct
-                                FROM product_list p
-                                         JOIN category_list c ON p.categoryId = c.categoryId
-                                WHERE nameProduct LIKE '%${searchValue}%'
-                                   OR nameCategory LIKE '%${searchValue}%'`, (error, data) => {
+            this.connect.query(`SELECT p.nameProduct, c.nameCategory, p.priceProduct, p.imageProduct
+                                FROM product_List p JOIN category_list c
+                                                         ON p.categoryId = c.categoryId
+                                WHERE p.nameProduct LIKE '%${searchValue}%';`, (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
