@@ -172,30 +172,7 @@ class userController {
         res.writeHead(301, {'location': '/homeAdmin'});
         res.end();
     }
-    sort = async (req, res) => {
-        // let data = ''
-        // req.on('data', chunk => {
-        //     data += chunk;
-        // })
-        // req.on('end', async () => {
-            // let chossen = qs.parse(data);
-            // let arrChossen = JSON.parse(fs.readFileSync('sort.json', "utf-8"));
-            // arrChossen.push(chossen);
-            // fs.writeFileSync('sort.json', JSON.stringify(arrChossen));
-            // let option = arrChossen[arrChossen.length - 1];
-            // if (option == "Giá tăng dần") {
-            //     await productService.sortUpByPrice();
-            //     res.writeHead(301, {'location': '/home'});
-            //     res.end();
-            // }
-        fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
-             await productService.sortUpByPrice();
-            res.writeHead(301, {'location': '/home'});
-            res.write(indexHtml)
-              res.end();
-        })
-        //})
-    }
+
 }
 
 module.exports = new userController();

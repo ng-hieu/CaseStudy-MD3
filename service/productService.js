@@ -168,12 +168,11 @@ class ProductService {
     }
     sortUpByPrice = () =>{
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory, product_list.priceProduct
-                                FROM product_List
-                                INNER JOIN category_list
-                                ON product_list.categoryId = category_list.categoryId ORDER BY priceProduct;`, (err, data)=>{
-                if (error) {
-                    reject(error);
+            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory, product_list.priceProduct, product_list.imageProduct
+                                FROM product_List JOIN category_list
+                                ON product_list.categoryId = category_list.categoryId ORDER BY product_list.priceProduct;`, (err, data)=>{
+                if (err) {
+                    reject(err);
                 } else {
                     resolve(data);
                 }
@@ -182,13 +181,15 @@ class ProductService {
     }
     sortDownByPrice = () =>{
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory, product_list.priceProduct
-                                FROM product_List
-                                         INNER JOIN category_list
-                                                    ON product_list.categoryId = category_list.categoryId
-                                WHERE nameProduct LIKE '%${searchValue}%'
-                                   OR nameCategory LIKE '%${searchValue}%'
-                                ORDER BY priceProduct DESC;`)
+            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory, product_list.priceProduct, product_list.imageProduct
+                                FROM product_List JOIN category_list
+                                ON product_list.categoryId = category_list.categoryId ORDER BY product_list.priceProduct DESC;`, (err, data)=>{
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            })
         })
     }
     showInforCustomer = (id) => {

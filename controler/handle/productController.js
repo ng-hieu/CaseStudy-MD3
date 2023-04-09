@@ -90,32 +90,32 @@ class ProductController {
             res.end();
         })
     }
-    delItemToCart = async (req, res,productId) => {
+    delItemToCart = async (req, res, productId) => {
         let cookies = cookie.parse(req.headers.cookie);
         let user = JSON.parse(cookies.user).userId;
-        await productService.deItemToCart(user,productId);
-        res.writeHead(301,  {'location': "/shoppingCart"});
+        await productService.deItemToCart(user, productId);
+        res.writeHead(301, {'location': "/shoppingCart"});
         res.end();
     }
-    delAllToCart = async (req,res)=>{
+    delAllToCart = async (req, res) => {
         let cookies = cookie.parse(req.headers.cookie)
         let user = JSON.parse(cookies.user).userId
         await productService.delAllItemToCart(user)
-        res.writeHead(301,  {'location': "/shoppingCart"});
+        res.writeHead(301, {'location': "/shoppingCart"});
         res.end();
     }
     increaseQuantityToCart = async (req, res, productId) => {
         let cookies = cookie.parse(req.headers.cookie);
         let user = JSON.parse(cookies.user).userId;
-        await productService.increaseQuantityToCart(user,productId);
-        res.writeHead(301,  {'location': "/shoppingCart"});
+        await productService.increaseQuantityToCart(user, productId);
+        res.writeHead(301, {'location': "/shoppingCart"});
         res.end();
     }
     reduceQuantityToCart = async (req, res, productId) => {
         let cookies = cookie.parse(req.headers.cookie);
         let user = JSON.parse(cookies.user).userId;
-        await productService.reduceQuantityToCart(user,productId);
-        res.writeHead(301,  {'location': "/shoppingCart"});
+        await productService.reduceQuantityToCart(user, productId);
+        res.writeHead(301, {'location': "/shoppingCart"});
         res.end();
     }
 
@@ -162,7 +162,7 @@ class ProductController {
             res.end();
         })
     }
-    getInforUser = (userInfor, indexHtml)=>{
+    getInforUser = (userInfor, indexHtml) => {
         let userHtml = '';
         userInfor.map(user => {
             userHtml += `
@@ -181,9 +181,9 @@ class ProductController {
         let cookies = cookie.parse(req.headers.cookie);
         let user = JSON.parse(cookies.user).userId;
 
-        console.log("Checkkkkkkk   "+user)
-        fs.readFile('./view/inforCustomer.html', "utf-8", async (err, indexHtml)=>{
-            if(err){
+        console.log("Checkkkkkkk   " + user)
+        fs.readFile('./view/inforCustomer.html', "utf-8", async (err, indexHtml) => {
+            if (err) {
                 console.log(err);
             } else {
                 let userInfor = await productService.showInforCustomer(user);
@@ -192,7 +192,44 @@ class ProductController {
                 res.end();
             }
         })
-}
+    }
+    sortUp = async (req, res) => {
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', async () => {
+            let productAfterSort = await productService.sortUpByPrice()
+            fs.readFile('./view/index.html', "utf-8", (err, data) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    data = this.getHtmlProduct(productAfterSort, data);
+                    res.write(data);
+                    res.end();
+                }
+            })
+        })
+    }
+    sortDown = async (req, res) => {
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', async () => {
+            let productAfterSort = await productService.sortDownByPrice()
+            console.log(productAfterSort)
+            fs.readFile('./view/index.html', "utf-8", (err, data) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    data = this.getHtmlProduct(productAfterSort, data);
+                    res.write(data);
+                    res.end();
+                }
+            })
+        })
+    }
 }
 
 module.exports = new ProductController()

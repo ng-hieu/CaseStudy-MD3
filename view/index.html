@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
@@ -224,14 +224,11 @@
     <div class="headline" style="margin-top: 0px;">
         <h1>shop ba con sói hướng nội</h1>
     </div>
-    <form method="post">
-        <select name="selects">
-            <option>-Sắp xếp-</option>
-            <option name="up" value="up"><a href="/sort">Giá tăng dần</a></option>
-            <option name="down" value="down">Giá giảm dần</option>
-        </select>
-        <a href="/sort" type="submit">Sắp xếp</a>
-    </form>
+    <div>
+        <label>-Sắp xếp-</label><br>
+        <button><a href="/sortUp">Sắp xếp theo giá tăng dần</a></button><br>
+        <button><a href="/sortDown">Sắp xếp theo giá giảm dần</a></button>
+    </div>
     <ul class="products">
         {product}
     </ul>
