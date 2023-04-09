@@ -218,7 +218,6 @@ class ProductController {
         })
         req.on('end', async () => {
             let productAfterSort = await productService.sortDownByPrice()
-            console.log(productAfterSort)
             fs.readFile('./view/index.html', "utf-8", (err, data) => {
                 if (err) {
                     console.log(err)
