@@ -23,8 +23,6 @@ const router = {
     "delAllToCart": productController.delAllToCart,
     'increaseQuantityToCart':productController.increaseQuantityToCart,
     'reduceQuantityToCart':productController.reduceQuantityToCart,
-
-
 }
 
 module.exports = router;

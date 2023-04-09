@@ -19,10 +19,10 @@ class editOrderDetail {
         let orderHtml = '';
         orderData.forEach(values => {
             orderHtml += `<tr>
-            <th> id :${values.orderId}</th>
-            <th> time :${values.timeOrder}</th>
-            <th> total:${values.totaleCost}</th>
-            <th> user ID :${values.userId}</th>                        
+            <th> ${values.orderId}</th>
+            <th> ${values.timeOrder}</th>
+            <th> ${values.totaleCost}</th>
+            <th> ${values.userId}</th>                        
             <th><form method="post">           
             <a type="button"href="/deleteOrderDetail/${values.orderId}">Xóa</a>     
             </form></th>                        

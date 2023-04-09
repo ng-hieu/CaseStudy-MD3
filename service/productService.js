@@ -35,9 +35,12 @@ class ProductService {
         return new Promise((resolve, reject) => {
             this.connect.query(`select *
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 9a60fbbcbd2534d2638e747aa66040e253fec1e8
+=======
+>>>>>>> d94c94a72c1c442d08f57bbff759060e07fcd4b3
                                 from product_list
                                 where productId = ${id}`, (error, data) => {
                 if (error) {
