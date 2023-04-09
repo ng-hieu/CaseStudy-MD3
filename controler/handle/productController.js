@@ -85,6 +85,8 @@ class ProductController {
             let cookies = cookie.parse(req.headers.cookie);
             let user = JSON.parse(cookies.user).userId;
             let products = await productService.showItemToCart(user);
+            let productHtml = await productService.totalPriceToCart(user)
+            indexHtml = indexHtml.replace(`{totalPrice}`, productHtml);
             indexHtml = this.getShoppingCart(products, indexHtml);
             res.write(indexHtml);
             res.end();
@@ -123,7 +125,6 @@ class ProductController {
         let cookies = cookie.parse(req.headers.cookie || '');
         if (cookies.user) {
             let user = JSON.parse(cookies.user);
-            console.log(user)
             fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
                 let products = await productService.showAll();
                 indexHtml = this.getHtmlProduct(products, indexHtml);
@@ -189,7 +190,6 @@ class ProductController {
         let cookies = cookie.parse(req.headers.cookie);
         let user = JSON.parse(cookies.user).userId;
 
-        console.log("Checkkkkkkk   " + user)
         fs.readFile('./view/inforCustomer.html', "utf-8", async (err, indexHtml) => {
             if (err) {
                 console.log(err);

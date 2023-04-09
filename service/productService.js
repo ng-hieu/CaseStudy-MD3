@@ -9,7 +9,6 @@ class ProductService {
         this.connect = connection.getConnection();
     }
 
-    //Display all variable in SQL Database
     showAll = () => {
         return new Promise((resolve, reject) => {
             this.connect.query(`select p.productId,
@@ -49,11 +48,11 @@ class ProductService {
             this.connect.query(
                 `INSERT INTO cart_detail (userId, productId, quantity)
                  VALUES (${userId}, ${productId}, '1')`,
-                (error,data) => {
+                (error, data) => {
                     if (error) {
                         reject(error);
                     } else {
-                       resolve(data)
+                        resolve(data)
                     }
                 }
             );
@@ -143,6 +142,20 @@ class ProductService {
             })
         })
     }
+    totalPriceToCart = (userId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`SELECT SUM(c.quantity * p.priceProduct) AS \`totalPrice\`
+                                FROM cart_detail c
+                                         JOIN product_list p ON c.productId = p.productId
+                                WHERE c.userId = ${userId}`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data[0].totalPrice);
+                }
+            })
+        })
+    }
 
     // Searched product SQL Database by price in descending order
     searchProducts = (searchValue) => {
@@ -166,11 +179,16 @@ class ProductService {
             })
         })
     }
-    sortUpByPrice = () =>{
+    sortUpByPrice = () => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory, product_list.priceProduct, product_list.imageProduct
-                                FROM product_List JOIN category_list
-                                ON product_list.categoryId = category_list.categoryId ORDER BY product_list.priceProduct;`, (err, data)=>{
+            this.connect.query(`SELECT product_list.nameProduct,
+                                       category_list.nameCategory,
+                                       product_list.priceProduct,
+                                       product_list.imageProduct
+                                FROM product_List
+                                         JOIN category_list
+                                              ON product_list.categoryId = category_list.categoryId
+                                ORDER BY product_list.priceProduct;`, (err, data) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -179,11 +197,16 @@ class ProductService {
             })
         })
     }
-    sortDownByPrice = () =>{
+    sortDownByPrice = () => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT product_list.nameProduct, category_list.nameCategory, product_list.priceProduct, product_list.imageProduct
-                                FROM product_List JOIN category_list
-                                ON product_list.categoryId = category_list.categoryId ORDER BY product_list.priceProduct DESC;`, (err, data)=>{
+            this.connect.query(`SELECT product_list.nameProduct,
+                                       category_list.nameCategory,
+                                       product_list.priceProduct,
+                                       product_list.imageProduct
+                                FROM product_List
+                                         JOIN category_list
+                                              ON product_list.categoryId = category_list.categoryId
+                                ORDER BY product_list.priceProduct DESC;`, (err, data) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -194,9 +217,17 @@ class ProductService {
     }
     showInforCustomer = (id) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT u.userId, u.nameUser, u.ageUser, u.email, u.phoneUser, u.addressUser, COUNT(od.orderId) AS orders
-                                FROM user_list u JOIN order_list o ON u.userId = o.userId
-                                                 JOIN order_detail od ON od.orderId = o.orderId WHERE u.userId = ${id};`, (err, data)=>{
+            this.connect.query(`SELECT u.userId,
+                                       u.nameUser,
+                                       u.ageUser,
+                                       u.email,
+                                       u.phoneUser,
+                                       u.addressUser,
+                                       COUNT(od.orderId) AS orders
+                                FROM user_list u
+                                         JOIN order_list o ON u.userId = o.userId
+                                         JOIN order_detail od ON od.orderId = o.orderId
+                                WHERE u.userId = ${id};`, (err, data) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -207,4 +238,5 @@ class ProductService {
     }
 }
 
-module.exports = new ProductService();
+module
+    .exports = new ProductService();
