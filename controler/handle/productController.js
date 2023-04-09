@@ -123,6 +123,7 @@ class ProductController {
         let cookies = cookie.parse(req.headers.cookie || '');
         if (cookies.user) {
             let user = JSON.parse(cookies.user);
+            console.log(user)
             fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
                 let products = await productService.showAll();
                 indexHtml = this.getHtmlProduct(products, indexHtml);
@@ -151,16 +152,23 @@ class ProductController {
     }
 
     descriptionProduct = (req, res, id) => {
-        fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
-            let products = await productService.findById(id);
-            descriptionProductHtml = descriptionProductHtml.replace("{image}", products.imageProduct)
-            descriptionProductHtml = descriptionProductHtml.replace("{descriptionName}", products.nameProduct)
-            descriptionProductHtml = descriptionProductHtml.replace("{descriptionPrice}", products.priceProduct)
-            descriptionProductHtml = descriptionProductHtml.replace("{descriptionDescription}", products.descriptionProduct)
-            descriptionProductHtml = descriptionProductHtml.replace("{descriptionQuantity}", products.quantityProduct)
-            res.write(descriptionProductHtml);
-            res.end();
-        })
+
+        let cookies = cookie.parse(req.headers.cookie || '');
+        if (cookies) {
+            fs.readFile("./view/product/descriptionProduct.html", "utf-8", async (error, descriptionProductHtml) => {
+                let products = await productService.findById(id);
+                descriptionProductHtml = descriptionProductHtml.replace("{image}", products.imageProduct)
+                descriptionProductHtml = descriptionProductHtml.replace("{descriptionName}", products.nameProduct)
+                descriptionProductHtml = descriptionProductHtml.replace("{descriptionPrice}", products.priceProduct)
+                descriptionProductHtml = descriptionProductHtml.replace("{descriptionDescription}", products.descriptionProduct)
+                descriptionProductHtml = descriptionProductHtml.replace("{descriptionQuantity}", products.quantityProduct)
+                res.write(descriptionProductHtml);
+                res.end();
+            })
+        } else {
+            res.writeHead(301, {'location': "/signin"});
+            res.end()
+        }
     }
     getInforUser = (userInfor, indexHtml) => {
         let userHtml = '';
@@ -230,5 +238,4 @@ class ProductController {
         })
     }
 }
-
-module.exports = new ProductController()
+module.exports = new ProductController();
