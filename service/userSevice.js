@@ -77,9 +77,6 @@ class UserService {
             })
         })
     }
-    addProductInCart=()=>{
-
-    }
 
 }
 

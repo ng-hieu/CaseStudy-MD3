@@ -19,7 +19,7 @@ http.createServer((req, res) => {
     } else {
         chosenHandle = handleController.shownotFound
     }
-    chosenHandle(req, res, id)
+    chosenHandle(req, res, id);
 
 
 }).listen(8080, () => {

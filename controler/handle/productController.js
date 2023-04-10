@@ -1,8 +1,8 @@
 const fs = require('fs')
 const productService = require('../../service/productService');
 const cookie = require('cookie');
-const qs = require("qs");
 
+const qs = require("qs");
 
 class ProductController {
     getHtmlProduct = (products, indexHtml) => {
@@ -101,7 +101,6 @@ class ProductController {
     delAllToCart = async (req, res) => {
         let cookies = cookie.parse(req.headers.cookie);
         let user = JSON.parse(cookies.user).userId;
-        console.log(user + "day la log");
         await productService.delAllItemToCart(user);
         res.writeHead(301, {'location': "/shoppingCart"});
         res.end();
@@ -122,19 +121,34 @@ class ProductController {
     }
 
     home = (req, res) => {
-        let cookies = cookie.parse(req.headers.cookie || '');
-        if (cookies.user) {
-            let user = JSON.parse(cookies.user);
-            console.log(user)
-            fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
-                let products = await productService.showAll();
-                indexHtml = this.getHtmlProduct(products, indexHtml);
-                res.write(indexHtml);
+        if(req.method==='GET'){
+            let cookies = cookie.parse(req.headers.cookie || '');
+            if (cookies.user) {
+                let user = JSON.parse(cookies.user);
+                fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
+                    let products = await productService.showAll();
+                    indexHtml = this.getHtmlProduct(products, indexHtml);
+                    res.write(indexHtml);
+                    res.end();
+                })
+            } else {
+                res.writeHead(301, {'location': "/signin"});
                 res.end();
-            })
+            }
         } else {
-            res.writeHead(301, {'location': "/signin"});
-            res.end();
+            let data = '';
+            req.on('data', chunk =>{
+                data += chunk;
+            })
+            req.on('end', async ()=>{
+                fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
+                    let valueSearch = qs.parse(data).searchProduct;
+                    let afterSearch = await productService.searchProducts(valueSearch);
+                    indexHtml = this.getHtmlProduct(afterSearch, indexHtml);
+                    res.write(indexHtml);
+                    res.end();
+                })
+            })
         }
     }
     homeBfsign = (req, res) => {
@@ -144,8 +158,9 @@ class ProductController {
             fs.readFile("./view/homeBfSign.html", "utf-8", async (error, homeBfSignHtml) => {
                 let products = await productService.showAll();
                 homeBfSignHtml = this.getHtmlProduct(products, homeBfSignHtml);
+                res.setHeader('set-Cookie',['user=; max-age=0']);
                 res.write(homeBfSignHtml);
-                res.end();
+                res.end('Cookie cleared');
             })
         } else {
             res.writeHead(301, {'location': "/signin"});
@@ -227,6 +242,7 @@ class ProductController {
         })
         req.on('end', async () => {
             let productAfterSort = await productService.sortDownByPrice()
+            console.log(productAfterSort)
             fs.readFile('./view/index.html', "utf-8", (err, data) => {
                 if (err) {
                     console.log(err)
@@ -280,7 +296,7 @@ class ProductController {
             })
         }
     }
-    showTotalPriceToCart = (req,res) => {
+     showTotalPriceToCart = (req,res) => {
         fs.readFile("./view/product/shoppingCart.html", "utf-8", async (error, indexHtml) => {
             let cookies = cookie.parse(req.headers.cookie)
             let userId = JSON.parse(cookies.user).userId
