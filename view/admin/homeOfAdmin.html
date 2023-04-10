@@ -214,7 +214,8 @@
         <a class="nav-link" href="/editOrderDetail"><i class="fas fa-sitemap" style="color: white"></i></a>
     </div>
     <div class="navbar-right">
-        <a class="nav-link" href="/signout">SIGN OUT</a>
+        <button  onclick="setCookie('user', '', 0)">SIGN OUT</button>
+        <a href="/signin"  id="signin" hidden=""></a>
     </div>
 </div>
 <div id="wrapper" class="main">
@@ -224,8 +225,15 @@
     <ul class="products">
         {product}
     </ul>
-</div>
+</div><script>
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        document.getElementById('signin').click()
+    }
 
-
+</script>
 </body>
 </html>

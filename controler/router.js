@@ -1,6 +1,6 @@
 const productController = require('./handle/productController');
 const userController = require('./handle/userController');
-const admincontroller = require('./handle/adminController');
+const adminController = require('./handle/adminController');
 const router = {
     "home": productController.home,
     'edit': userController.editProductById,
@@ -14,8 +14,8 @@ const router = {
     "signout": productController.homeBfsign,
     "shoppingCart": productController.showShoppingCart,
     'addToCart':productController.addShoppingCart,
-    "editOrderDetail":admincontroller.showOrderDetail,
-    "deleteOrderDetail":admincontroller.deleteOrderDetail,
+    "editOrderDetail":adminController.showOrderDetail,
+    "deleteOrderDetail":adminController.deleteOrderDetail,
     "sortUp": productController.sortUp,
     "sortDown": productController.sortDown,
     "showInfor": productController.showInforUser,
