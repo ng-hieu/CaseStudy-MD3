@@ -34,13 +34,6 @@ class ProductService {
     findById = (id) => {
         return new Promise((resolve, reject) => {
             this.connect.query(`select *
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 9a60fbbcbd2534d2638e747aa66040e253fec1e8
-=======
->>>>>>> d94c94a72c1c442d08f57bbff759060e07fcd4b3
                                 from product_list
                                 where productId = ${id}`, (error, data) => {
                 if (error) {
@@ -60,7 +53,7 @@ class ProductService {
                     if (error) {
                         reject(error);
                     } else {
-                       resolve(data)
+                        resolve(data)
                     }
                 }
             );
@@ -95,9 +88,10 @@ class ProductService {
             })
         })
     }
-    delAllItemToCart = (userId) => {
+    delAllItemToCart =(userId) => {
+        console.log(userId+"day la log 2")
         return new Promise((resolve, reject) => {
-            this.connect.query(`DELETE
+            this.connect.query(`DELETE 
                                 FROM cart_detail
                                 WHERE userId = ${userId}`, (error, data) => {
                 if (error) {
@@ -212,6 +206,21 @@ class ProductService {
             })
         })
     }
+    searchProducts = (searchValue) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`SELECT p.nameProduct, c.nameCategory, p.priceProduct, p.imageProduct
+                                FROM product_List p JOIN category_list c
+                                                         ON p.categoryId = c.categoryId
+                                WHERE p.nameProduct LIKE '%${searchValue}%';`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+
 }
 
 module.exports = new ProductService();

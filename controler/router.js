@@ -19,10 +19,11 @@ const router = {
     "sortUp": productController.sortUp,
     "sortDown": productController.sortDown,
     "showInfor": productController.showInforUser,
-    'delItemToCart': productController.delItemToCart,
-    "delAllToCart": productController.delAllToCart,
+    'delItemToCart':productController.delItemToCart,
+    "deleteAll":productController.delAllToCart,
     'increaseQuantityToCart':productController.increaseQuantityToCart,
     'reduceQuantityToCart':productController.reduceQuantityToCart,
+    "buy":productController.buyProduct,
 }
 
 module.exports = router;
