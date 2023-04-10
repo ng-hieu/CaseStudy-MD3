@@ -191,7 +191,6 @@ class ProductController {
         let cookies = cookie.parse(req.headers.cookie);
         let user = JSON.parse(cookies.user).userId;
 
-        console.log("Checkkkkkkk   " + user)
         fs.readFile('./view/inforCustomer.html', "utf-8", async (err, indexHtml) => {
             if (err) {
                 console.log(err);
@@ -271,7 +270,7 @@ class ProductController {
                 data += chunk;
             })
             req.on('end', async (req,res)=>{
-                console.log('DATA '+ data)
+
                 fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
                     let valueSearch = qs.parse(data).searchProduct;
                     indexHtml = await productService.searchProducts(valueSearch);
@@ -281,6 +280,17 @@ class ProductController {
             })
         }
     }
+    showTotalPriceToCart = (req,res) => {
+        fs.readFile("./view/product/shoppingCart.html", "utf-8", async (error, indexHtml) => {
+            let cookies = cookie.parse(req.headers.cookie)
+            let userId = JSON.parse(cookies.user).userId
+            let productHtml = await productService.totalPriceToCart(userId)
+            indexHtml = indexHtml.replace(`{totalPrice}`, productHtml);
+            res.write(indexHtml)
+            res.end()
+        })
+    }
+
 
 }
 

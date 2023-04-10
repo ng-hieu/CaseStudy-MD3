@@ -24,6 +24,7 @@ const router = {
     'increaseQuantityToCart':productController.increaseQuantityToCart,
     'reduceQuantityToCart':productController.reduceQuantityToCart,
     "buy":productController.buyProduct,
+
 }
 
 module.exports = router;

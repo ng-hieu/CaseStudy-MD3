@@ -220,6 +220,17 @@ class ProductService {
             })
         })
     }
+    totalPriceToCart = (userId, productId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`select sum(c.quantity * p.priceProduct) from cart_detail c join product_list p on c.productId = p.productId where c.userId = ${userId} and c.productId = ${productId}`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
 
 }
 
