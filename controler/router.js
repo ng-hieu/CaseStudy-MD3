@@ -23,6 +23,7 @@ const router = {
     'reduceQuantityToCart':productController.reduceQuantityToCart,
     "editOrderDetail":adMincontroller.showOrderDetail,
     "deleteOrderDetail":adMincontroller.deleteOrderDetail,
+
 }
 
 module.exports = router;

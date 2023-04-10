@@ -169,6 +169,7 @@ class userController {
     }
     deleteProductById = async (req, res, id) => {
         await userSevice.deleteProductByAdmin(id);
+        console.log('Checkkkkkk' + id)
         res.writeHead(301, {'location': '/homeAdmin'});
         res.end();
     }

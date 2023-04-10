@@ -84,6 +84,8 @@ class ProductController {
             let cookies = cookie.parse(req.headers.cookie);
             let user = JSON.parse(cookies.user).userId;
             let products = await productService.showItemToCart(user);
+            let productHtml = await productService.totalPriceToCart(user)
+            indexHtml = indexHtml.replace(`{totalPrice}`, productHtml);
             indexHtml = this.getShoppingCart(products, indexHtml);
             res.write(indexHtml);
             res.end();
@@ -240,7 +242,6 @@ class ProductController {
         })
         req.on('end', async () => {
             let productAfterSort = await productService.sortDownByPrice()
-            console.log(productAfterSort)
             fs.readFile('./view/index.html', "utf-8", (err, data) => {
                 if (err) {
                     console.log(err)
