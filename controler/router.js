@@ -1,6 +1,6 @@
 const productController = require('./handle/productController');
 const userController = require('./handle/userController');
-const adMincontroller = require('./handle/adminController');
+const admincontroller = require('./handle/adminController');
 const router = {
     "home": productController.home,
     'edit': userController.editProductById,
@@ -11,18 +11,19 @@ const router = {
     'addProduct': userController.addProduct,
     "":productController.homeBfsign,
     "delete": userController.deleteProductById,
+    "signout": productController.homeBfsign,
+    "shoppingCart": productController.showShoppingCart,
+    'addToCart':productController.addShoppingCart,
+    "editOrderDetail":admincontroller.showOrderDetail,
+    "deleteOrderDetail":admincontroller.deleteOrderDetail,
     "sortUp": productController.sortUp,
     "sortDown": productController.sortDown,
     "showInfor": productController.showInforUser,
-    "signout": productController.homeBfsign,
-    "shoppingCart": productController.showShoppingCart,
-    'addToCart': productController.addShoppingCart,
-    'delItemToCart': productController.delItemToCart,
-    "delAllToCart": productController.delAllToCart,
+    'delItemToCart':productController.delItemToCart,
+    "deleteAll":productController.delAllToCart,
     'increaseQuantityToCart':productController.increaseQuantityToCart,
     'reduceQuantityToCart':productController.reduceQuantityToCart,
-    "editOrderDetail":adMincontroller.showOrderDetail,
-    "deleteOrderDetail":adMincontroller.deleteOrderDetail,
+    "buy":productController.buyProduct,
 
 }
 

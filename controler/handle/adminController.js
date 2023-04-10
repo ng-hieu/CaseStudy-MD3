@@ -24,7 +24,7 @@ class editOrderDetail {
             <th> ${values.totaleCost}</th>
             <th> ${values.userId}</th>                        
             <th><form method="post">           
-            <a type="button"href="/deleteOrderDetail/${values.orderId}">Xóa</a>     
+            <a type="button" href="/deleteOrderDetail/${values.orderId}">Xóa</a>     
             </form></th>                        
         </tr>`
         })

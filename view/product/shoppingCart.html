@@ -306,7 +306,7 @@
     }
 
 </style>
-<body>
+<body  onload="showTotalPriceToCart()">
 <div class="navbar" style="padding-bottom: 0px;padding-top: 0px;">
     <a href="/home" class="navbar-brand" style="padding-bottom: 15px">Home</a>
     <div class="navbar-left">
@@ -320,7 +320,7 @@
 <div class="MainBoundary">
     <div class="ShoppingCartIntro">Shopping Cart</div>
     <div class="BuyButton">
-        <a href="/delAllToCart"  class="btn btn-outline-danger" >Delete</a>
+        <a href="/deleteAll"  class="btn btn-outline-danger" >Delete</a>
 
     </div>
     <table>
@@ -337,8 +337,11 @@
         {shoppingCart}
         </tbody>
     </table>
-    <div class="totalPrice" >Total: {totalPrice}VND</div>
-    <div class></div>
+    <div class="totalPrice">{totalPrice}</div>
+    <div class>
+        <a href="/buy"> BUY NOW</a>
+    </div>
+
 </div>
 </body>
 </html>

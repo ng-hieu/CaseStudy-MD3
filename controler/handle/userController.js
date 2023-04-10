@@ -25,7 +25,7 @@ class userController {
                     res.end();
                 } else {
                     res.setHeader('Set-Cookie', cookie.serialize('user', JSON.stringify(account[0]), {
-                        httpOnly: true,
+                        httpOnly: false,
                         maxAge: 60 * 60 * 24 * 7 // 1 week
                     }));
                     if (account[0].roleUser === 1) {

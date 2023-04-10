@@ -1,7 +1,9 @@
 const fs = require('fs')
 const productService = require('../../service/productService');
 const cookie = require('cookie');
-const qs = require('qs');
+
+const qs = require("qs");
+
 class ProductController {
     getHtmlProduct = (products, indexHtml) => {
         let productHtml = '';
@@ -99,9 +101,9 @@ class ProductController {
         res.end();
     }
     delAllToCart = async (req, res) => {
-        let cookies = cookie.parse(req.headers.cookie)
-        let user = JSON.parse(cookies.user).userId
-        await productService.delAllItemToCart(user)
+        let cookies = cookie.parse(req.headers.cookie);
+        let user = JSON.parse(cookies.user).userId;
+        await productService.delAllItemToCart(user);
         res.writeHead(301, {'location': "/shoppingCart"});
         res.end();
     }
@@ -158,8 +160,9 @@ class ProductController {
             fs.readFile("./view/homeBfSign.html", "utf-8", async (error, homeBfSignHtml) => {
                 let products = await productService.showAll();
                 homeBfSignHtml = this.getHtmlProduct(products, homeBfSignHtml);
+                res.setHeader('set-Cookie',['user=; max-age=0']);
                 res.write(homeBfSignHtml);
-                res.end();
+                res.end('Cookie cleared');
             })
         } else {
             res.writeHead(301, {'location': "/signin"});
@@ -205,7 +208,6 @@ class ProductController {
         let cookies = cookie.parse(req.headers.cookie);
         let user = JSON.parse(cookies.user).userId;
 
-        console.log("Checkkkkkkk   " + user)
         fs.readFile('./view/inforCustomer.html', "utf-8", async (err, indexHtml) => {
             if (err) {
                 console.log(err);
@@ -253,5 +255,60 @@ class ProductController {
             })
         })
     }
+
+    buyProduct=(req,res)=>{
+        fs.readFile("./view/product/shoppingCart.html", "utf-8", async (error, indexHtml) => {
+            let cookies = cookie.parse(req.headers.cookie);
+            let userId = JSON.parse(cookies.user).userId;
+            let productHtml = await productService.totalPriceToCart(userId)
+            indexHtml = indexHtml.replace(`{totalPrice}`, productHtml);
+            res.write(indexHtml)
+            res.end()
+        })
+    }
+    home = (req, res) => {
+        if(req.method==='GET'){
+            let cookies = cookie.parse(req.headers.cookie || '');
+            if (cookies.user) {
+                let user = JSON.parse(cookies.user);
+                fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
+                    let products = await productService.showAll();
+                    indexHtml = this.getHtmlProduct(products, indexHtml);
+                    res.write(indexHtml);
+                    res.end();
+                })
+            } else {
+                res.writeHead(301, {'location': "/signin"});
+                res.end();
+            }
+        } else {
+            let data = '';
+            req.on('data', chunk =>{
+                data += chunk;
+            })
+            req.on('end', async (req,res)=>{
+
+                fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
+                    let valueSearch = qs.parse(data).searchProduct;
+                    indexHtml = await productService.searchProducts(valueSearch);
+                    res.write(indexHtml);
+                    res.end();
+                })
+            })
+        }
+    }
+     showTotalPriceToCart = (req,res) => {
+        fs.readFile("./view/product/shoppingCart.html", "utf-8", async (error, indexHtml) => {
+            let cookies = cookie.parse(req.headers.cookie)
+            let userId = JSON.parse(cookies.user).userId
+            let productHtml = await productService.totalPriceToCart(userId)
+            indexHtml = indexHtml.replace(`{totalPrice}`, productHtml);
+            res.write(indexHtml)
+            res.end()
+        })
+    }
+
+
 }
+
 module.exports = new ProductController();

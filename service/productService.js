@@ -87,9 +87,9 @@ class ProductService {
             })
         })
     }
-    delAllItemToCart = (userId) => {
+    delAllItemToCart =(userId) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`DELETE
+            this.connect.query(`DELETE 
                                 FROM cart_detail
                                 WHERE userId = ${userId}`, (error, data) => {
                 if (error) {
@@ -229,6 +229,32 @@ class ProductService {
             })
         })
     }
+    searchProducts = (searchValue) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`SELECT p.nameProduct, c.nameCategory, p.priceProduct, p.imageProduct
+                                FROM product_List p JOIN category_list c
+                                                         ON p.categoryId = c.categoryId
+                                WHERE p.nameProduct LIKE '%${searchValue}%';`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+    totalPriceToCart = (userId, productId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`select sum(c.quantity * p.priceProduct) from cart_detail c join product_list p on c.productId = p.productId where c.userId = ${userId} and c.productId = ${productId}`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+
 }
 
 module
