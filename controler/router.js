@@ -14,8 +14,6 @@ const router = {
     "signout": productController.homeBfsign,
     "shoppingCart": productController.showShoppingCart,
     'addToCart':productController.addShoppingCart,
-    "editOrderDetail":adminController.showOrderDetail,
-    "deleteOrderDetail":adminController.deleteOrderDetail,
     "sortUp": productController.sortUp,
     "sortDown": productController.sortDown,
     "showInfor": productController.showInforUser,
@@ -23,8 +21,10 @@ const router = {
     "deleteAll":productController.delAllToCart,
     'increaseQuantityToCart':productController.increaseQuantityToCart,
     'reduceQuantityToCart':productController.reduceQuantityToCart,
-    "buy":productController.buyProduct,
 
+    "editOrderDetail":adminController.showOrderDetail,
+    "deleteOrderDetail":adminController.deleteOrderDetail,
+    'buynow':productController.buttonBuyNow
 }
 
 module.exports = router;

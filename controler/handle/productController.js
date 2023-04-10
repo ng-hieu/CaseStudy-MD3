@@ -121,6 +121,41 @@ class ProductController {
         res.writeHead(301, {'location': "/shoppingCart"});
         res.end();
     }
+    getBuyNow = (products, indexHtml) => {
+        let productHtml = '';
+        products.forEach(values => {
+            productHtml += `
+          <tr>
+      <th>${values.orderId}</th>
+      <th>${values.productId}</th>
+      <th>${values.priceCurrent}</th>
+      <th>${values.quantity}</th>    
+        </tr>`
+        })
+
+        indexHtml = indexHtml.replace(`{buyNow}`, productHtml);
+        return indexHtml;
+    }
+    buttonBuyNow = (req, res) => {
+        fs.readFile("./view/product/orderDetail.html", "utf-8", async (error, orderDetail) => {
+            let cookies = cookie.parse(req.headers.cookie);
+            let user = JSON.parse(cookies.user).userId;
+
+            await productService.addOrderList(user);
+            await productService.addOrderIdToCartDetail(user);
+            await productService.coppyToOrderDetail(user);
+            let orderIdNow = await productService.orderIdNow(user)
+            // console.log(orderIdNow[0]["max(orderID)"])
+            await productService.updateTotal(user, orderIdNow[0]["max(orderID)"]);
+            await productService.delAllItemToCart(user)
+
+
+            let products = await productService.showItemInOrder(orderIdNow[0]["max(orderID)"]);
+            orderDetail = this.getBuyNow(products, orderDetail);
+            res.write(orderDetail);
+            res.end();
+        })
+    }
 
     home = (req, res) => {
         if(req.method==='GET'){
@@ -256,16 +291,6 @@ class ProductController {
         })
     }
 
-    buyProduct=(req,res)=>{
-        fs.readFile("./view/product/shoppingCart.html", "utf-8", async (error, indexHtml) => {
-            let cookies = cookie.parse(req.headers.cookie);
-            let userId = JSON.parse(cookies.user).userId;
-            let productHtml = await productService.totalPriceToCart(userId)
-            indexHtml = indexHtml.replace(`{totalPrice}`, productHtml);
-            res.write(indexHtml)
-            res.end()
-        })
-    }
     home = (req, res) => {
         if(req.method==='GET'){
             let cookies = cookie.parse(req.headers.cookie || '');
@@ -286,27 +311,18 @@ class ProductController {
             req.on('data', chunk =>{
                 data += chunk;
             })
-            req.on('end', async (req,res)=>{
-
+            req.on('end', async ()=>{
                 fs.readFile("./view/index.html", "utf-8", async (error, indexHtml) => {
                     let valueSearch = qs.parse(data).searchProduct;
-                    indexHtml = await productService.searchProducts(valueSearch);
+                    let afterSearch = await productService.searchProducts(valueSearch);
+                    indexHtml = this.getHtmlProduct(afterSearch, indexHtml);
                     res.write(indexHtml);
                     res.end();
                 })
             })
         }
     }
-     showTotalPriceToCart = (req,res) => {
-        fs.readFile("./view/product/shoppingCart.html", "utf-8", async (error, indexHtml) => {
-            let cookies = cookie.parse(req.headers.cookie)
-            let userId = JSON.parse(cookies.user).userId
-            let productHtml = await productService.totalPriceToCart(userId)
-            indexHtml = indexHtml.replace(`{totalPrice}`, productHtml);
-            res.write(indexHtml)
-            res.end()
-        })
-    }
+
 
 
 }

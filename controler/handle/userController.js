@@ -44,6 +44,7 @@ class userController {
     }
 
     signUp = (req, res) => {
+
         if (req.method === "GET") {
             fs.readFile("./view/sign/signUp.html", "utf-8", async (error, signUpHtml) => {
                 res.write(signUpHtml);
@@ -56,9 +57,15 @@ class userController {
             })
             req.on('end', async () => {
                 let userData = qs.parse(data);
-                await userSevice.addUser(userData);
-                res.writeHead(301, {'location': "/signin"});
-                res.end();
+                if (userSevice.check(userData.email)){
+                    res.writeHead(301, {'location': "/signup"});
+                    res.end();
+                }else {
+                    await userSevice.addUser(userData);
+                    res.writeHead(301, {'location': "/signin"});
+                    res.end();
+                }
+
             })
         }
     }

@@ -259,12 +259,14 @@
   }
 
   .BuyButton {
-    margin-left: 94.5%;
+    margin-left: 80%;
   }
 
   .totalPrice {
-    margin-left: 95%;
-    font-weight: bold
+    margin-left: 80%;
+    font-weight: bold;
+    font-size: 20px;
+    color:#0061ff
   }
 
   table {
@@ -306,29 +308,30 @@
 </style>
 <body>
 <div class="navbar" style="padding-bottom: 0px;padding-top: 0px;">
-  <a href="/homeAdmin" class="navbar-brand" style="padding-bottom: 15px">Home</a>
+  <a href="/home" class="navbar-brand" style="padding-bottom: 15px">Home</a>
   <div class="navbar-left">
-    <a class="nav-link" href="/addProduct"><i class="fas fa-plus" style="color: white"></i></a>
-    <a class="nav-link" href="/deleteOrderDetail"><i class="fas fa-sitemap" style="color: white"></i></a>
+    <a class="nav-link" href="/showInfor"><i class="fas fa-user" style="color: white"></i></a>
+    <a class="nav-link" href="/shoppingCart"><i class="fas fa-cart-arrow-down" style="color: white"></i></a>
   </div>
   <div class="navbar-right">
     <a class="nav-link" href="/signout">SIGN OUT</a>
   </div>
 </div>
 <div class="MainBoundary">
-  <div class="ShoppingCartIntro">Order detail</div>
+  <div class="ShoppingCartIntro">History Store</div>
+
   <table>
     <tr>
-      <th>Order Id</th>
-      <th>Time Order</th>
-      <th>Total cost</th>
-      <th>User Id</th>
-      <th>Action</th>
-    </tr>
+      <th>OrderId</th>
+      <th>ProductId</th>
+      <th>PriceCurren</th>
+      <th>quantity</th>
+
     <tbody>
-    {orderDetailData}
+    {buyNow}
     </tbody>
   </table>
+
   <div class></div>
 </div>
 </body>

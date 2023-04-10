@@ -73,6 +73,20 @@ class ProductService {
             })
         })
     }
+    showItemInOrder = (orderId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(` SELECT *
+                                 FROM order_detail
+                                 where orderId = ${orderId};
+            `, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
     deItemToCart = (userId, productId) => {
         return new Promise((resolve, reject) => {
             this.connect.query(`DELETE
@@ -87,9 +101,77 @@ class ProductService {
             })
         })
     }
-    delAllItemToCart =(userId) => {
+    addOrderList = (userId) => {
         return new Promise((resolve, reject) => {
-            this.connect.query(`DELETE 
+            this.connect.query(`insert into order_list (userId, timeOrder) value (${userId}, now());`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+    addOrderIdToCartDetail = (userId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`update cart_detail
+                                set orderId = (select max(orderID) from order_list where userID = ${userId})
+                                where userID = ${userId};`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+    coppyToOrderDetail = (userId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`insert into order_detail (orderId, productId, quantity, priceCurrent)
+                                select cd.orderId, cd.productId, cd.quantity, pl.priceProduct
+                                from cart_detail as cd
+                                         join product_list as pl
+                                              on cd.productId = pl.productId
+                                where cd.orderId =
+                                      (select max(orderID) from order_list where userID = ${userId});`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+    orderIdNow = (userId) => {
+        return new Promise(async (resolve, reject) => {
+            this.connect.query(` select max(orderID)
+                                 from order_list
+                                 where userID = ${userId};`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+    updateTotal = (userId, orderId) => {
+        return new Promise(async (resolve, reject) => {
+            this.connect.query(` update order_list
+                                 set totalCost = ${await this.totalPriceToCart(userId)}
+                                 where orderId = ${orderId};`, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+
+    delAllItemToCart = (userId) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`DELETE
                                 FROM cart_detail
                                 WHERE userId = ${userId}`, (error, data) => {
                 if (error) {
@@ -229,31 +311,7 @@ class ProductService {
             })
         })
     }
-    searchProducts = (searchValue) => {
-        return new Promise((resolve, reject) => {
-            this.connect.query(`SELECT p.nameProduct, c.nameCategory, p.priceProduct, p.imageProduct
-                                FROM product_List p JOIN category_list c
-                                                         ON p.categoryId = c.categoryId
-                                WHERE p.nameProduct LIKE '%${searchValue}%';`, (error, data) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(data);
-                }
-            })
-        })
-    }
-    totalPriceToCart = (userId, productId) => {
-        return new Promise((resolve, reject) => {
-            this.connect.query(`select sum(c.quantity * p.priceProduct) from cart_detail c join product_list p on c.productId = p.productId where c.userId = ${userId} and c.productId = ${productId}`, (error, data) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(data);
-                }
-            })
-        })
-    }
+
 
 }
 

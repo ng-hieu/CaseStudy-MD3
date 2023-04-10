@@ -38,6 +38,20 @@ class UserService {
             })
         })
     }
+    check = (data) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`select email
+                                from user_list
+                                where email = '${data}'
+                                 `, (error, user) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(user);
+                }
+            })
+        })
+    }
 
     addProduct = (product) => {
         return new Promise((resolve, reject) => {

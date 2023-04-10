@@ -259,7 +259,7 @@
     }
 
     .BuyButton {
-        margin-left: 94.5%;
+        margin-left: 80%;
     }
 
     .totalPrice {
@@ -306,7 +306,7 @@
     }
 
 </style>
-<body  onload="showTotalPriceToCart()">
+<body>
 <div class="navbar" style="padding-bottom: 0px;padding-top: 0px;">
     <a href="/home" class="navbar-brand" style="padding-bottom: 15px">Home</a>
     <div class="navbar-left">
@@ -320,8 +320,8 @@
 <div class="MainBoundary">
     <div class="ShoppingCartIntro">Shopping Cart</div>
     <div class="BuyButton">
-        <a href="/deleteAll"  class="btn btn-outline-danger" >Delete</a>
-
+        <a href="/delAllToCart"  class="btn btn-outline-danger" >Delete</a>
+        <a href="/buynow" class="btn btn-outline-danger" > Buy Now </a>
     </div>
     <table>
         <tr>
@@ -337,11 +337,8 @@
         {shoppingCart}
         </tbody>
     </table>
-    <div class="totalPrice">{totalPrice}</div>
-    <div class>
-        <a href="/buy"> BUY NOW</a>
-    </div>
-
+    <div class="totalPrice" >Total: {totalPrice}VND</div>
+    <div class></div>
 </div>
 </body>
 </html>
