@@ -78,6 +78,21 @@ class UserService {
         })
     }
 
+    check = (data) => {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`select email
+                                from user_list
+                                where email = '${data}'
+                                 `, (error, user) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(user[0]);
+                }
+            })
+        })
+    }
+
 }
 
 module.exports = new UserService();
